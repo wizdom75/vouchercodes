@@ -1,0 +1,46 @@
+.placeholder {
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(226, 221, 221, 0.897);
+    ;
+    opacity: 1;
+    /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(226, 221, 221, 0.897);
+    ;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgba(226, 221, 221, 0.897);
+  }
+}
+
+.page-heading {
+  font-family: "lato";
+  font-weight: 100;
+  color: rgb(58, 54, 54, 0.5);
+}
+
+body {
+  font-family: 'lato';
+  font-weight: 100;
+}
+
+.logo {
+  font-family: 'lato', sans-serif;
+  font-size: 28px;
+  text-decoration: none;
+  color: black;
+}
+
+.text-black {
+  color: black;
+}
+
+.text-pink {
+  color: pink;
+}
