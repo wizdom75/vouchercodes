@@ -54,12 +54,14 @@ export default {
     return { title: this.$t("account") };
   },
 
-  data: () => ({
-    form: new Form({
-      password: "",
-      password_confirmation: ""
-    })
-  }),
+  data() {
+    return {
+      form: new Form({
+        password: "",
+        password_confirmation: ""
+      })
+    };
+  },
 
   methods: {
     async update() {
