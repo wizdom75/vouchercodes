@@ -2,7 +2,7 @@
   <div class="main-layout">
     <navbar />
 
-    <div class="container">
+    <div class="container-fluid px-0">
       <child />
     </div>
     <footerBar />

@@ -2,7 +2,10 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container">
-        <router-link :to="{ name: 'home'}" class="logo text-success">{{ appName }}&reg;</router-link>
+        <router-link :to="{ name: 'home'}" class="logo">
+          <span class="text-primary">{{ appName }}</span>
+          .co.uk
+        </router-link>
 
         <button
           class="navbar-toggler"
@@ -27,14 +30,14 @@
               <input
                 type="search"
                 id="searchTxt"
-                class="form-control placeholder border-0 rounded-0"
+                class="form-control placeholder rounded-0 border-right-0"
                 placeholder="Enter search term here.."
                 @focus="searching = true"
                 @blur="searching = false"
-                v-on:input="liveSearch()"
+                v-on:input="searchTimeOut()"
               />
               <div class="input-group-append">
-                <span class="search-form input-group-text bg-white border-0 rounded-0">
+                <span class="search-form input-group-text bg-white border-left-0 rounded-0">
                   <fa icon="search" class="text-muted" fixed-width />
                 </span>
               </div>
@@ -150,9 +153,9 @@
         </div>
       </div>
     </nav>
-    <div class="search-results" v-if="term.length > 1">
+    <div class="search-results" v-if="term.length > 0">
       <div class="container h-100">
-        <div class="row">
+        <div class="row pt-3">
           <div class="col-6">
             <div class="page-heading text-uppercase">Offers ({{offers.length}})</div>
             <div v-if=" offers.length > 0">
@@ -166,19 +169,41 @@
                 :shop_logo="offer.logo"
                 :shop_title="offer.shop"
                 :shop_slug="offer.slug"
+                v-on:click="clearInput()"
               ></SearchOfferCard>
+            </div>
+            <div v-else-if="offers.length < 1">
+              <p class="text-muted mt-3">No offers</p>
             </div>
           </div>
           <div class="col-3">
             <div class="page-heading text-uppercase">Shops ({{shops.length}})</div>
-            <div v-if=" shops.length > 0">
-              <div v-for="offer in shops" class="card" :key="offer.id">{{offer.title}}</div>
+            <div v-if=" shops.length > 0" v-on:click="clearInput()">
+              <router-link
+                v-for="offer in shops"
+                :to="'/'+offer.slug "
+                class="card dropdown-item pl-3 mt-1"
+                :key="offer.id"
+                v-on:click="clearInput()"
+              >{{ offer.title }}</router-link>
+            </div>
+            <div v-else-if="shops.length < 1">
+              <p class="text-muted mt-3">No shops</p>
             </div>
           </div>
           <div class="col-3">
             <div class="page-heading text-uppercase">Categories ({{cats.length}})</div>
-            <div v-if=" cats.length > 0">
-              <div v-for="offer in cats" class="card" :key="offer.id">{{offer.title}}</div>
+            <div v-if=" cats.length > 0" v-on:click="clearInput()">
+              <router-link
+                v-for="offer in cats"
+                :to="'/cat/'+offer.slug "
+                class="card dropdown-item pl-3 mt-1"
+                :key="offer.id"
+                v-on:click="clearInput()"
+              >{{ offer.title }}</router-link>
+            </div>
+            <div v-else-if="cats.length < 1">
+              <p class="text-muted mt-3">No categories</p>
             </div>
           </div>
         </div>
@@ -203,6 +228,7 @@ export default {
       categories: [],
       offers: [],
       stores: [],
+      shops: {},
       cats: [],
       term: "",
       searching: false
@@ -248,6 +274,29 @@ export default {
           1000
         );
       }
+    },
+    searchTimeOut() {
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+      this.timer = setTimeout(() => {
+        // your code
+        this.term = document.getElementById("searchTxt").value;
+        axios
+          .get("/api/live-search/" + this.term)
+          .then(response => {
+            this.offers = response.data[0];
+            this.shops = response.data[1];
+            this.cats = response.data[2];
+          })
+          .catch(error => {
+            console.log(this.offers);
+          });
+      }, 500);
+    },
+    clearInput() {
+      document.getElementById("searchTxt").reset();
     }
   }
 };
@@ -281,4 +330,33 @@ export default {
   background-color: #f7f9fb;
   min-height: 100vh;
 }
+/* input[type="search"] {
+  background: rgb(253, 246, 246);
+  border: 0 none;
+  color: #d7d7d7;
+  width: 250px;
+  padding: 6px 15px 6px 35px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  margin: 3px 80px;
+}
+
+input[type="search"]:focus {
+  background: #ccc;
+  color: #6a6f75;
+  padding-left: 10%;
+  margin-left: -100px;
+  width: 300px;
+  position: relative;
+  z-index: 1000;
+  outline: none;
+}
+
+input[type="search"] {
+  -webkit-transition: all 0.7s ease 0s;
+  -moz-transition: all 0.7s ease 0s;
+  -o-transition: all 0.7s ease 0s;
+  transition: all 0.7s ease 0s;
+} */
 </style>

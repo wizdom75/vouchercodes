@@ -216,20 +216,7 @@ class FeedController extends Controller
         
         $fname = 'voucherfeed.csv';
         $dest = $feedFolder.'/'.$fname;
-        // copy($url, $dest);
-        // /**
-        //  * Unzip / Extract datafeed to $fname and unlink the zip file
-        //  */
-        // $zip = new ZipArchive;
-        // if ($zip->open($dest) === TRUE) {
-        //     $zip->renameName($zip->getNameIndex(0), $fname);
-        //     $zip->extractTo($feedFolder, $fname);
-        //     $zip->close();
-        //     unlink($dest);
-        // }
-        /**
-         * Open the datafile with fopen and create a handle
-         */
+
         $handle = fopen($dest, 'r');
         /**
          * Initiate counter that is used to skip hearders
@@ -242,27 +229,21 @@ class FeedController extends Controller
         while (($data = fgetcsv($handle, 0, ',')) !== FALSE){
             if($i === 0){
                 //Skip headers in CSV file
-            }else{
-
-                        
-                        $voucher = new Voucher;
-                        
-                        $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
-                        $voucher->type = $data[$feedSettings->type_col];
-                        $voucher->code = $data[$feedSettings->code_col];
-                        $voucher->title = substr($data[$feedSettings->title_col], 0,190);
-                        $voucher->blurb = $data[$feedSettings->blurb_col];
-                        $voucher->terms = $data[$feedSettings->terms_col];
-                        $voucher->url = $data[$feedSettings->url_col];
-                        $voucher->valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_from_col])));
-                        $voucher->valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_to_col])));
-                        $voucher->category_slug = $this->makeSlug(substr($data[$feedSettings->category_slug_col], 0, 100));
-        
-                        $voucher->save();
-                        
-
-
-                }
+            }else{       
+                $voucher = new Voucher;                        
+                $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
+                $voucher->type = $data[$feedSettings->type_col];
+                $voucher->code = $data[$feedSettings->code_col];
+                $voucher->title = substr($data[$feedSettings->title_col], 0,190);
+                $voucher->blurb = $data[$feedSettings->blurb_col];
+                $voucher->terms = $data[$feedSettings->terms_col];
+                $voucher->url = $data[$feedSettings->url_col];
+                $voucher->valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_from_col])));
+                $voucher->valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_to_col])));
+                $voucher->category_slug = $feedSettings->category_slug_col;
+                $voucher->promo_id = $feedSettings->promo_id_col;
+                $voucher->save();
+            }
 
             $i++;//Counter used to skip csv file headers
         }

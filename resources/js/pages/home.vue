@@ -8,71 +8,76 @@
         <p class="h3">Voucher Codes for your favourite UK shops</p>
       </div>
     </div>
-    <h1 class="h3 text-muted">Most Popular Today</h1>
-    <div class="row">
-      <FeaturedCard
-        v-for="top in top20"
-        :key="top.id"
-        :voucher_title="top.title"
-        :shop_link="top.slug"
-        :shop_banner="'/images/vouchers/brown-hat.jpg'"
-        :shop_logo="top.logo"
-        :shop_name="top.store"
-        :styles="'col-md-4 col-6 mb-3 p-0'"
-      ></FeaturedCard>
+    <div class="container">
+      <h1 class="h3 text-muted">Most Popular Today</h1>
+      <div class="row">
+        <FeaturedCard
+          v-for="top in top20"
+          :key="top.id"
+          :voucher_title="top.title"
+          :shop_link="top.slug"
+          :shop_banner="'/images/vouchers/brown-hat.jpg'"
+          :shop_logo="top.logo"
+          :shop_name="top.store"
+          :styles="'col-md-4 col-6 mb-3 p-0'"
+        ></FeaturedCard>
+      </div>
     </div>
+
     <Subscribe></Subscribe>
-    <h1 class="h3 text-muted">Health & Beauty</h1>
-    <div class="row">
-      <FeaturedCard
-        v-for="top in featured1"
-        :key="top.id"
-        :voucher_title="top.title"
-        :shop_link="top.slug"
-        :shop_banner="'/images/vouchers/hollister.jpg'"
-        :shop_logo="top.logo"
-        :shop_name="top.store"
-        :styles="'col-md-4 col-6 mb-3 p-0'"
-      ></FeaturedCard>
-    </div>
-    <h1 class="h3 text-muted">Women's Fashion</h1>
-    <div class="row">
-      <FeaturedCard
-        v-for="top in featured2"
-        :key="top.id"
-        :voucher_title="top.title"
-        :shop_link="top.slug"
-        :shop_banner="'/images/vouchers/hollister.jpg'"
-        :shop_logo="top.logo"
-        :shop_name="top.store"
-        :styles="'col-md-3 col-6 mb-3 p-0'"
-      ></FeaturedCard>
-    </div>
-    <h1 class="h3 text-muted">Travel</h1>
-    <div class="row">
-      <FeaturedCard
-        v-for="top in featured3"
-        :key="top.id"
-        :voucher_title="top.title"
-        :shop_link="top.slug"
-        :shop_banner="'/images/vouchers/hollister.jpg'"
-        :shop_logo="top.logo"
-        :shop_name="top.store"
-        :styles="'col-md-3 col-6 mb-3 p-0'"
-      ></FeaturedCard>
-    </div>
-    <h1 class="h3 text-muted">Printable Vouchers</h1>
-    <div class="row">
-      <FeaturedCard
-        v-for="top in featured4"
-        :key="top.id"
-        :voucher_title="top.title"
-        :shop_link="top.slug"
-        :shop_banner="'/images/vouchers/hollister.jpg'"
-        :shop_logo="top.logo"
-        :shop_name="top.store"
-        :styles="'col-md-3 col-6 mb-3 p-0'"
-      ></FeaturedCard>
+    <div class="container">
+      <h1 class="h3 text-muted">Health & Beauty</h1>
+      <div class="row">
+        <FeaturedCard
+          v-for="top in featured1"
+          :key="top.id"
+          :voucher_title="top.title"
+          :shop_link="top.slug"
+          :shop_banner="'/images/vouchers/hollister.jpg'"
+          :shop_logo="top.logo"
+          :shop_name="top.store"
+          :styles="'col-md-4 col-6 mb-3 p-0'"
+        ></FeaturedCard>
+      </div>
+      <h1 class="h3 text-muted">Women's Fashion</h1>
+      <div class="row">
+        <FeaturedCard
+          v-for="top in featured2"
+          :key="top.id"
+          :voucher_title="top.title"
+          :shop_link="top.slug"
+          :shop_banner="'/images/vouchers/hollister.jpg'"
+          :shop_logo="top.logo"
+          :shop_name="top.store"
+          :styles="'col-md-3 col-6 mb-3 p-0'"
+        ></FeaturedCard>
+      </div>
+      <h1 class="h3 text-muted">Travel</h1>
+      <div class="row">
+        <FeaturedCard
+          v-for="top in featured3"
+          :key="top.id"
+          :voucher_title="top.title"
+          :shop_link="top.slug"
+          :shop_banner="'/images/vouchers/hollister.jpg'"
+          :shop_logo="top.logo"
+          :shop_name="top.store"
+          :styles="'col-md-3 col-6 mb-3 p-0'"
+        ></FeaturedCard>
+      </div>
+      <h1 class="h3 text-muted">Printable Vouchers</h1>
+      <div class="row">
+        <FeaturedCard
+          v-for="top in featured4"
+          :key="top.id"
+          :voucher_title="top.title"
+          :shop_link="top.slug"
+          :shop_banner="'/images/vouchers/hollister.jpg'"
+          :shop_logo="top.logo"
+          :shop_name="top.store"
+          :styles="'col-md-3 col-6 mb-3 p-0'"
+        ></FeaturedCard>
+      </div>
     </div>
   </div>
 </template>

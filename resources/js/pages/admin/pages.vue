@@ -1,5 +1,5 @@
 <template>
-  <card :title="$t('Pages')">
+  <card :title="$t('pages')">
     <table class="table">
       <thead>
         <tr>
@@ -125,7 +125,7 @@
             <!-- Submit Button -->
             <div class="form-group row p-3">
               <div class="col-md-9 ml-md-auto">
-                <v-button :loading="form.busy" type="success">{{ $t('Save') }}</v-button>
+                <v-button :loading="form.busy" type="success">{{ $t('save') }}</v-button>
               </div>
             </div>
           </form>

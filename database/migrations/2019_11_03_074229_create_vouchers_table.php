@@ -15,7 +15,7 @@ class CreateVouchersTable extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('feed_id')->index()->nullable();
+            $table->bigInteger('promo_id')->index()->nullable();
             $table->string('retailer_mid')->index();
             $table->string('category_slug')->index();
             $table->string('type')->default('deal')->index();

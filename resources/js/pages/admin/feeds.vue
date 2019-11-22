@@ -139,7 +139,7 @@
             <!-- Submit Button -->
             <div class="form-group row p-3">
               <div class="col-md-9 ml-md-auto">
-                <v-button :loading="form.busy" type="success">{{ $t('Save') }}</v-button>
+                <v-button :loading="form.busy" type="success">{{ $t('save') }}</v-button>
               </div>
             </div>
           </form>
@@ -192,6 +192,7 @@
                           <option value="category_col">Category</option>
                           <option value="blurb_col">Description</option>
                           <option value="terms_col">Terms</option>
+                          <option value="promo_id_col">Promotion ID</option>
                           <option value="url_col">Tracking URL</option>
                           <option value="valid_from_col">Valid from</option>
                           <option value="valid_to_col">Valid to</option>
@@ -200,8 +201,8 @@
                       </td>
                     </tr>
 
-                    <tr v-for="count in counter">
-                      <td v-for="item in params[count]">{{ item | truncate(40) }}</td>
+                    <tr v-for="count in counter" :key="count">
+                      <td v-for="item in params[count]" :key="item">{{ item | truncate(40) }}</td>
                     </tr>
                   </table>
                 </div>
@@ -210,7 +211,7 @@
               <div class="form-group row p-3">
                 <div class="col-md-9 ml-md-auto">
                   <input v-model="paramsForm.feed_id" type="text" value="feed.id" />
-                  <v-button :loading="paramsForm.busy" type="success">{{ $t('Save') }}</v-button>
+                  <v-button :loading="paramsForm.busy" type="success">{{ $t('save') }}</v-button>
                 </div>
               </div>
             </form>
@@ -231,7 +232,7 @@ export default {
   scrollToTop: false,
 
   metaInfo() {
-    return { title: this.$t("Admin feeds") };
+    return { title: this.$t("feeds") };
   },
 
   data() {

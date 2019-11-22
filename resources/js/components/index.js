@@ -4,8 +4,11 @@ import Child from './Child'
 import Button from './Button'
 import DealCard from './DealCard'
 import Checkbox from './Checkbox'
+import SquareAd from './SquareAd'
+import Searched from './Searched'
 import Subscribe from './Subscribe'
 import BrowseCard from './BrowseCard'
+import PopularShops from './PopularShops'
 import FeaturedCard from './FeaturedCard'
 import SearchOfferCard from './SearchOfferCard'
 import {
@@ -21,11 +24,14 @@ import {
   Button,
   DealCard,
   Checkbox,
+  SquareAd,
   HasError,
+  Searched,
   Subscribe,
   BrowseCard,
   AlertError,
   AlertSuccess,
+  PopularShops,
   FeaturedCard,
   SearchOfferCard
 ].forEach(Component => {

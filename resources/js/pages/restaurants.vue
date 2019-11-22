@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron jumbotron-fluid mt-1 mb-3 restuarant">
+    <div class="jumbotron jumbotron-fluid mt-1 mb-0 restuarant">
       <h1
         class="text-white text-capitalize display-4 text-center"
       >Restaurant Vouchers & offers near you</h1>
@@ -19,64 +19,35 @@
         </div>
       </div>
     </div>
-    <div class="row mb-5">
-      <div class="col-md-8">
-        <DealCard
-          v-for="voucher in vouchers"
-          :key="voucher.id"
-          :voucher_id="voucher.id"
-          :voucher_title="voucher.title"
-          :voucher_blurb="voucher.blurb"
-          :voucher_type="voucher.type"
-          :voucher_terms="voucher.terms"
-          :voucher_code="voucher.code"
-          :voucher_url="voucher.url"
-          :voucher_mid="voucher.mid"
-          :shop_logo="voucher.logo"
-          :shop_title="voucher.store"
-          :feedback="feedback"
-        ></DealCard>
-        <div class="mt-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title text-muted h4">Top deal searches</div>
-              <div class="card-text">
-                <a
-                  :href="retailer.name"
-                  v-for="retailer in sellers"
-                  class="btn btn-light text-muted m-1"
-                  :key="retailer.name"
-                >{{retailer.name}}</a>
-              </div>
-            </div>
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-8">
+          <DealCard
+            v-for="voucher in vouchers"
+            :key="voucher.id"
+            :voucher_id="voucher.id"
+            :voucher_title="voucher.title"
+            :voucher_blurb="voucher.blurb"
+            :voucher_type="voucher.type"
+            :voucher_terms="voucher.terms"
+            :voucher_code="voucher.code"
+            :voucher_url="voucher.url"
+            :voucher_mid="voucher.mid"
+            :shop_logo="voucher.logo"
+            :shop_title="voucher.store"
+            :feedback="feedback"
+          ></DealCard>
+          <div class="mt-3">
+            <Searched></Searched>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="banner-square">
-          <img
-            class="banner w-100"
-            src="https://via.placeholder.com/300x300.png/3d9/fff?text=Banner+Ad"
-            alt
-          />
-        </div>
-        <div class="mt-3">
-          <BrowseCard></BrowseCard>
-        </div>
-        <div class="mt-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title text-muted h4">Popular retailers</div>
-              <div class="card-text">
-                <p class="text-muted text-small">Even more deals, promos and codes for November 2019</p>
-                <a
-                  :href="retailer.name"
-                  v-for="retailer in sellers"
-                  class="btn btn-light text-muted m-1"
-                  :key="retailer.name"
-                >{{retailer.name}}</a>
-              </div>
-            </div>
+        <div class="col-md-4">
+          <SquareAd></SquareAd>
+          <div class="mt-3">
+            <BrowseCard></BrowseCard>
+          </div>
+          <div class="mt-3">
+            <PopularShops title="Popular shops" category="food"></PopularShops>
           </div>
         </div>
       </div>

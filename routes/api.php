@@ -29,6 +29,8 @@ Route::get('/nhs-offers', 'VoucherController@getNHSOffers');
 Route::get('/exclusive-offers', 'VoucherController@getExclusiveOffers');
 Route::get('/offers-by-category/{slug}', 'VoucherController@getCategoryOffers');
 Route::get('/retailers/{slug}','RetailerController@index');
+Route::get('/popular-shops/{category}','RetailerController@popularShops');
+Route::get('/searched','RetailerController@searched');
 Route::get('/retailer/{slug}','RetailerController@show');
 Route::get('/cats','CategoryController@getAll');
 Route::post('/subscribe','ListController@store');
@@ -51,6 +53,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
+    Route::post('settings/suggest-a-code', 'Settings\GenericController@suggestACode');
 });
 /**
  * Admin account routes /
@@ -84,6 +87,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('/admin/feed-params', 'FeedParamsController');
     Route::resource('/admin/pages', 'PageController');
     Route::resource('/admin/vouchers', 'VoucherController');
+    Route::get('/admin/suggested-codes', 'VoucherController@suggested');
     Route::resource('/admin/categories', 'CategoryController');
     Route::patch('admin/dashboard', 'Settings\ProfileController@update');
     Route::patch('admin/password', 'Settings\PasswordController@update');

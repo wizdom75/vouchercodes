@@ -4,7 +4,9 @@
       <h1 class="display-4 text-capitalize text-center text-white">{{page.title}}</h1>
     </div>
 
-    <div class="text-muted">{{page.body}}</div>
+    <div class="container">
+      <div class="text-muted">{{page.body}}</div>
+    </div>
   </div>
 </template>
 

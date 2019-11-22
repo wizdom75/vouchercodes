@@ -1,20 +1,20 @@
 <template>
   <card :title="$t('submit_a_code')">
-    <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('info_updated')" />
+    <form @submit.prevent="addCode" @keydown="form.onKeydown($event)">
+      <alert-success :form="form" :message="$t('code_added')" />
 
       <!-- Retailer Name -->
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">{{ $t('retailer_name') }}</label>
         <div class="col-md-7">
           <input
-            v-model="form.name"
-            :class="{ 'is-invalid': form.errors.has('name') }"
+            v-model="form.retailer_name"
+            :class="{ 'is-invalid': form.errors.has('retailer_name') }"
             class="form-control"
             type="text"
-            name="name"
+            name="retailer_name"
           />
-          <has-error :form="form" field="name" />
+          <has-error :form="form" field="retailer_name" />
         </div>
       </div>
       <!-- Voucher code -->
@@ -50,13 +50,13 @@
         <label class="col-md-3 col-form-label text-md-right">{{ $t('expiry_date') }}</label>
         <div class="col-md-7">
           <input
-            v-model="form.valid_to"
-            :class="{ 'is-invalid': form.errors.has('valid_to') }"
+            v-model="form.expiry_date"
+            :class="{ 'is-invalid': form.errors.has('expiry_date') }"
             class="form-control"
             type="text"
-            name="valid_to"
+            name="expiry_date"
           />
-          <has-error :form="form" field="valid_to" />
+          <has-error :form="form" field="expiry_date" />
         </div>
       </div>
       <!-- Source of code -->
@@ -91,7 +91,7 @@
       <!-- Submit Button -->
       <div class="form-group row">
         <div class="col-md-9 ml-md-auto">
-          <v-button :loading="form.busy" type="success">{{ $t('update') }}</v-button>
+          <v-button :loading="form.busy" type="success">{{ $t('submit') }}</v-button>
         </div>
       </div>
     </form>
@@ -101,6 +101,7 @@
 <script>
 import Form from "vform";
 import { mapGetters } from "vuex";
+import axios from "axios";
 
 export default {
   scrollToTop: false,
@@ -109,12 +110,18 @@ export default {
     return { title: this.$t("submit_a_code") };
   },
 
-  data: () => ({
-    form: new Form({
-      name: "",
-      email: ""
-    })
-  }),
+  data() {
+    return {
+      form: new Form({
+        retailer_name: "",
+        code: "",
+        description: "",
+        expiry_date: "",
+        source_info: "",
+        further_info: ""
+      })
+    };
+  },
 
   computed: mapGetters({
     user: "auth/user"
@@ -128,10 +135,13 @@ export default {
   },
 
   methods: {
-    async update() {
-      const { data } = await this.form.patch("/api/settings/profile");
-
-      this.$store.dispatch("auth/updateUser", { user: data });
+    async addCode() {
+      await this.form
+        .submit("post", "/api/settings/suggest-a-code")
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => console.log(err));
     }
   }
 };

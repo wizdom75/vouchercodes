@@ -3,45 +3,47 @@
     <div class="jumbotron mt-1 rounded-0 mb-3 contact">
       <h1 class="display-4 text-center text-white">{{page.title}}</h1>
     </div>
-    <div
-      v-if="flashMessage=null"
-      class="alert alert-success"
-      role="alert"
-    >Your message has been sent.</div>
+    <div class="container">
+      <div
+        v-if="flashMessage=null"
+        class="alert alert-success"
+        role="alert"
+      >Your message has been sent.</div>
 
-    <div class="bg-primary text-light col-md-9 mx-auto p-3 mb-3">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" />
+      <div class="bg-primary text-light col-md-9 mx-auto p-3 mb-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject:</label>
+              <select type="subject" class="form-control" id="subject">
+                <option value>-Please select-</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Offer not working">Offer not working</option>
+                <option value="Merchant listing">Merchant listing</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" />
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="message">Message:</label>
+              <textarea class="form-control" id="message" rows="6"></textarea>
+            </div>
+            <button
+              id="sendButton"
+              type="submit"
+              class="btn btn-info mb-2 btn-block"
+              @click="sendMessage"
+            >Send message</button>
           </div>
-          <div class="form-group">
-            <label for="subject">Subject:</label>
-            <select type="subject" class="form-control" id="subject">
-              <option value>-Please select-</option>
-              <option value="Feedback">Feedback</option>
-              <option value="Offer not working">Offer not working</option>
-              <option value="Merchant listing">Merchant listing</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea class="form-control" id="message" rows="6"></textarea>
-          </div>
-          <button
-            id="sendButton"
-            type="submit"
-            class="btn btn-info mb-2 btn-block"
-            @click="sendMessage"
-          >Send message</button>
         </div>
       </div>
     </div>

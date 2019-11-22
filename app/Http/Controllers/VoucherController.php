@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Voucher;
 use App\Retailer;
+use App\SuggestedCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class VoucherController extends Controller
 {
+
+    public function suggested()
+    {
+        $suggested = SuggestedCode::orderBy('id', 'desc')->paginate(10);
+
+        return $suggested;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -154,7 +162,8 @@ class VoucherController extends Controller
     public function getCategoryOffers($slug)
     {
         $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('category_slug', 'LIKE', '%'.$slug.'%')->get();
-        return json_encode($offers);
+        $category = DB::table('categories')->select('title')->where('slug', $slug)->first();
+        return json_encode([$offers, $category]);
     }
     public function getStudentOffers()
     {

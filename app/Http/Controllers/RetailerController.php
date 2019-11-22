@@ -14,9 +14,9 @@ class RetailerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function adminIndex()
+    public function searched()
     {
-        $retailers = Retailer::orderBy('title')->get();
+        $retailers = DB::table('retailers')->inRandomOrder()->take(15)->get();
         return $retailers;
     }
     /**
@@ -24,11 +24,31 @@ class RetailerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function popularShops($slug)
+    {
+        $retailers = DB::table('retailers')->where('description', 'LIKE', '%'.$slug.'%')->inRandomOrder()->take(20)->get();
+        return $retailers;
+    }
+   /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $retailers = Retailer::orderBy('title')->paginate(10);
+        $retailers = DB::table('retailers')->orderBy('title')->paginate(10);
         return json_encode($retailers); 
-    }
+    } 
+       /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function adminIndex()
+    {
+        $retailers = DB::table('retailers')->orderBy('title')->get();
+        return json_encode($retailers); 
+    } 
     /**
      * Display a listing of the resource.
      *

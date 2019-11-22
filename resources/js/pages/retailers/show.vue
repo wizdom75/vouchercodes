@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="card mt-3 flex-row flex-wrap border-0 bg-light">
       <div class="card-header border-0">
         <img :src="shop.logo" :alt="shop.title" class="border-0 m-0" width="100px" />
@@ -41,47 +41,16 @@
         ></DealCard>
 
         <div class="mt-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title text-muted h4">Top deal searches</div>
-              <div class="card-text">
-                <a
-                  :href="retailer.name"
-                  v-for="retailer in retailers"
-                  class="btn btn-light text-muted m-1"
-                  :key="retailer.name"
-                >{{retailer.name}}</a>
-              </div>
-            </div>
-          </div>
+          <Searched></Searched>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="banner-square mt-3">
-          <img
-            class="banner w-100"
-            src="https://via.placeholder.com/300x300.png/3d9/fff?text=Banner+Ad"
-            alt
-          />
-        </div>
+        <SquareAd></SquareAd>
         <div class="mt-3">
           <BrowseCard></BrowseCard>
         </div>
         <div class="mt-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title text-muted h4">Popular retailers</div>
-              <div class="card-text">
-                <p class="text-muted text-small">Even more deals, promos and codes for November 2019</p>
-                <a
-                  :href="retailer.name"
-                  v-for="retailer in retailers"
-                  class="btn btn-light text-muted m-1"
-                  :key="retailer.id"
-                >{{retailer.name}}</a>
-              </div>
-            </div>
-          </div>
+          <PopularShops title="Popular shops" :category="shop.title"></PopularShops>
         </div>
       </div>
     </div>

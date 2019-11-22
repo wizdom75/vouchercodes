@@ -64,10 +64,6 @@ export default {
     axios.get("/api/admin/vouchers-mumber").then(res => {
       this.vouchers = res.data;
     });
-    // Fill the form with user data.
-    this.form.keys().forEach(key => {
-      this.form[key] = this.user[key];
-    });
   },
 
   methods: {

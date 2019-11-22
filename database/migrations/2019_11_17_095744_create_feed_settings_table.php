@@ -26,6 +26,7 @@ class CreateFeedSettingsTable extends Migration
             $table->integer('valid_from_col')->nullable();
             $table->integer('valid_to_col')->nullable();
             $table->integer('category_slug_col')->nullable();
+            $table->integer('promo_col')->nullable();
             $table->timestamps();
         });
     }

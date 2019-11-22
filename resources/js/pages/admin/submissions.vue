@@ -1,31 +1,21 @@
 <template>
-  <card :title="$t('submission')">
+  <card :title="$t('admin_submission')">
     <table class="table">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Affiliate</th>
-          <th scope="col">URL</th>
-          <th scope="col">Compression</th>
-          <th scope="col">
-            <button
-              type="button"
-              class="btn btn-success rounded-circle"
-              data-toggle="modal"
-              @click="clearForm()"
-              data-target=".feedModalCenter"
-            >
-              <fa icon="plus" class="text-white" fixed />
-            </button>
-          </th>
+          <th scope="col">Shop</th>
+          <th scope="col">Code</th>
+          <th scope="col">Expiry date</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="feed in submission.data" :key="feed.id">
           <th scope="row">{{feed.id}}</th>
-          <td>{{feed.affiliate}}</td>
-          <td>{{feed.url}}</td>
-          <td>{{feed.compression}}</td>
+          <td>{{feed.retailer_name}}</td>
+          <td>{{feed.code}}</td>
+          <td>{{feed.expiry_date}}</td>
           <td>
             <button
               data-toggle="modal"
@@ -50,89 +40,6 @@
       :align="'center'"
       @pagination-change-page="getResults"
     ></pagination>
-    <div
-      class="modal fade feedModalCenter"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="feedModalCenterLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="feedModalCenter">Add a new feed</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form @submit.prevent="store" @keydown="form.onKeydown($event)">
-            <alert-success :form="form" :message="$t('new_feed_created')" />
-            <!-- Affiliate supplying feed  -->
-            <div class="form-group row p-3">
-              <label class="col-md-3 col-form-label text-md-right">{{ $t('affiliate_feed') }}</label>
-              <div class="col-md-7">
-                <select
-                  v-model="form.affiliate"
-                  :class="{ 'is-invalid': form.errors.has('affiliate') }"
-                  class="form-control"
-                  name="affiliate"
-                >
-                  <option value>-Please Select-</option>
-                  <option
-                    v-for="affiliate in affiliates"
-                    :value="affiliate.prefix"
-                    :key="affiliate.prefix"
-                  >{{affiliate.name}}</option>
-                </select>
-                <has-error :form="form" field="retailer_mid" />
-                <input v-model="form.retailer_mid" type="hidden" name="retailer_mid" />
-              </div>
-            </div>
-            <!-- feed compression -->
-            <div class="form-group row p-3">
-              <label class="col-md-3 col-form-label text-md-right">{{ $t('feed_compression') }}</label>
-              <div class="col-md-7">
-                <select
-                  v-model="form.compression"
-                  :class="{ 'is-invalid': form.errors.has('compression') }"
-                  class="form-control"
-                  type="text"
-                  name="compression"
-                >
-                  <option value>-Please select-</option>
-                  <option value="none">None</option>
-                  <option value="gz">GZip</option>
-                  <option value="zip">ZIP</option>
-                  <option value="rar">RAR</option>
-                </select>
-                <has-error :form="form" field="type" />
-              </div>
-            </div>
-            <!-- feed url -->
-            <div class="form-group row p-3">
-              <label class="col-md-3 col-form-label text-md-right">{{ $t('feed_url') }}</label>
-              <div class="col-md-7">
-                <textarea
-                  v-model="form.url"
-                  :class="{ 'is-invalid': form.errors.has('url') }"
-                  class="form-control"
-                  type="text"
-                  name="url"
-                ></textarea>
-                <has-error :form="form" field="url" />
-              </div>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="form-group row p-3">
-              <div class="col-md-9 ml-md-auto">
-                <v-button :loading="form.busy" type="success">{{ $t('Save') }}</v-button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
   </card>
 </template>
 
@@ -145,17 +52,12 @@ export default {
   scrollToTop: false,
 
   metaInfo() {
-    return { title: this.$t("Admin submission") };
+    return { title: this.$t("admin_submission") };
   },
 
   data() {
     return {
-      submission: "",
-      retailers: "",
-      edit: false,
       submission: {},
-      page: "",
-      pg: "",
       form: new Form({
         retailer_mid: "",
         type: "",
@@ -167,33 +69,7 @@ export default {
         valid_from: "",
         valid_to: "",
         id: ""
-      }),
-      affiliates: [
-        {
-          prefix: "AW",
-          name: "Affiliate Window"
-        },
-        {
-          prefix: "CJ",
-          name: "Commission Junction"
-        },
-        {
-          prefix: "AF",
-          name: "Affiliate Future"
-        },
-        {
-          prefix: "SS",
-          name: "Sharesale"
-        },
-        {
-          prefix: "WG",
-          name: "Webgains"
-        },
-        {
-          prefix: "PR",
-          name: "Paid on Results"
-        }
-      ]
+      })
     };
   },
   mounted() {
@@ -215,7 +91,7 @@ export default {
       }
       this.pg = page;
       axios
-        .get("/api/admin/submission?page=" + page)
+        .get("/api/admin/suggested-codes?page=" + page)
         .then(response => {
           this.submission = response.data;
         })

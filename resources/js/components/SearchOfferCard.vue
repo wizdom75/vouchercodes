@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="card mt-3 flex-row flex-wrap border-0" :key="voucher_id">
-      <div class="card-header border-0">
-        <router-link :to="'/'+shop_slug" class="nav-link">
+    <router-link :to="'/'+shop_slug" class="nav-link">
+      <div class="card mt-3 flex-row flex-wrap border-0 dropdown-item p-0" :key="voucher_id">
+        <div class="card-header border-0">
           <div class="p-0 m-0 text-center border">
             <div>
-              <img class="card-img-left m-0 p-0" :src="shop_logo" :alt="shop_title" width="90px" />
+              <img class="card-img-left m-0 p-0" :src="shop_logo" :alt="shop_title" width="80px" />
             </div>
             <span
               v-if="voucher_type === 'code' || voucher_type === 'voucher'"
@@ -17,16 +17,10 @@
             >DEAL</span>
             <span v-if="voucher_type === 'sale'" class="bg-danger text-white d-block">SALE</span>
           </div>
-        </router-link>
+        </div>
+        <div class="card-body">{{voucher_title}}</div>
       </div>
-      <div class="card-body">
-        <router-link :to="'/'+shop_slug" class>
-          <h2 class="h6 page-heading">
-            <span class="text-black">{{voucher_title}}</span>
-          </h2>
-        </router-link>
-      </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -47,20 +41,17 @@ export default {
 };
 </script>
 <style scoped>
-input[type="text"],
-textarea {
-  outline: none;
-  box-shadow: none !important;
-  border: 1px dashed rgb(236, 226, 226) !important;
-  text-align: center;
-  padding: 10px 15px;
-}
-
 /** extra offer card styling */
 .card-body {
   max-width: 60%;
 }
 .card-right {
   max-width: 30%;
+}
+.card {
+  max-width: 100%;
+}
+.card-text {
+  word-wrap: break-word;
 }
 </style>

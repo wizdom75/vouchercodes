@@ -307,7 +307,7 @@ export default {
 
   data() {
     return {
-      retailers: "",
+      retailers: {},
       pg: "",
       edit: false,
       form: new Form({

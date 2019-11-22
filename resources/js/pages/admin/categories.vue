@@ -1,5 +1,5 @@
 <template>
-  <card :title="$t('categories')">
+  <card :title="$t('admin_categories')">
     <table class="table">
       <thead>
         <tr>
@@ -62,6 +62,7 @@
       :limit="3"
       :show-disabled="true"
       :data="categories"
+      :meta="categories.meta"
       :align="'center'"
       @pagination-change-page="getResults"
     ></pagination>
@@ -172,7 +173,7 @@
             <!-- Submit Button -->
             <div class="form-group row p-3">
               <div class="col-md-9 ml-md-auto">
-                <v-button :loading="form.busy" type="success">{{ $t('Save') }}</v-button>
+                <v-button :loading="form.busy" type="success">{{ $t('save') }}</v-button>
               </div>
             </div>
           </form>
@@ -237,12 +238,12 @@ export default {
   scrollToTop: false,
 
   metaInfo() {
-    return { title: this.$t("Admin Categories") };
+    return { title: this.$t("admin_categories") };
   },
 
   data() {
     return {
-      categories: "",
+      categories: {},
       cats: "",
       edit: false,
       pg: "",

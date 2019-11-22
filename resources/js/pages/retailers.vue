@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1 class="h3 page-heading text-capitalize mt-3">{{head}}</h1>
 
     <BrowseCard title></BrowseCard>
@@ -16,47 +16,16 @@
           >{{ retailer.title }}</router-link>
         </div>
         <div class="mt-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title text-muted h4">Top deal searches</div>
-              <div class="card-text">
-                <a
-                  :href="retailer.name"
-                  v-for="retailer in sellers"
-                  class="btn btn-light text-muted m-1"
-                  :key="retailer.id"
-                >{{retailer.name}}</a>
-              </div>
-            </div>
-          </div>
+          <Searched></Searched>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="banner-square mt-3">
-          <img
-            class="banner w-100"
-            src="https://via.placeholder.com/300x300.png/3d9/fff?text=Banner+Ad"
-            alt
-          />
-        </div>
+        <SquareAd></SquareAd>
         <div class="mt-3">
           <BrowseCard></BrowseCard>
         </div>
         <div class="mt-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title text-muted h4">Popular retailers</div>
-              <div class="card-text">
-                <p class="text-muted text-small">Even more deals, promos and codes for November 2019</p>
-                <a
-                  :href="retailer.name"
-                  v-for="retailer in sellers"
-                  class="btn btn-light text-muted m-1"
-                  :key="retailer.id"
-                >{{retailer.name}}</a>
-              </div>
-            </div>
-          </div>
+          <PopularShops title="Popular shops" category="all"></PopularShops>
         </div>
       </div>
     </div>
