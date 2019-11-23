@@ -209,15 +209,18 @@ class FeedController extends Controller
             mkdir($feedFolder, 0777, $url);
         }
 
+        $fname = 'voucherfeed.csv';
         /**
          * Download the latest datafeed from merchant 
          * and copy to our newly created folder / server
          */
-        
-        $fname = 'voucherfeed.csv';
-        $dest = $feedFolder.'/'.$fname;
+        $this->getRemoteFile($url, $feedFolder.'/'.$fname);
+        copy($url, $feedFolder.'/'.$fname);
+ 
 
-        $handle = fopen($dest, 'r');
+        $file = $feedFolder.'/'.$fname;
+
+        $handle = fopen($file, 'r');
         /**
          * Initiate counter that is used to skip hearders
          */
@@ -229,7 +232,12 @@ class FeedController extends Controller
         while (($data = fgetcsv($handle, 0, ',')) !== FALSE){
             if($i === 0){
                 //Skip headers in CSV file
-            }else{       
+            }else{ 
+                //Skip voucher if it is already in database
+                $v = Voucher::where('promo_id', $data[$feedSettings->promo_id_col])->first();
+                if($v){
+                    continue;
+                }
                 $voucher = new Voucher;                        
                 $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
                 $voucher->type = $data[$feedSettings->type_col];
@@ -240,8 +248,8 @@ class FeedController extends Controller
                 $voucher->url = $data[$feedSettings->url_col];
                 $voucher->valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_from_col])));
                 $voucher->valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_to_col])));
-                $voucher->category_slug = $feedSettings->category_slug_col;
-                $voucher->promo_id = $feedSettings->promo_id_col;
+                $voucher->category_slug = $data[$feedSettings->category_slug_col];
+                $voucher->promo_id = $data[$feedSettings->promo_id_col];
                 $voucher->save();
             }
 

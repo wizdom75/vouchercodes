@@ -198,10 +198,10 @@ class VoucherController extends Controller
     public function featuredOffers()
     {
         $top20 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('type', '=', 'voucher')->limit(6)->get();
-        $featured1 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('category_slug', 'LIKE', '%health%')->limit(6)->get();
-        $featured2 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('category_slug', 'LIKE', '%led%')->limit(4)->get();
-        $featured3 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('category_slug', 'LIKE', '%acc%')->limit(4)->get();
-        $featured4 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('category_slug', 'LIKE', '%o%')->limit(4)->get();
+        $featured1 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('vouchers.title', 'LIKE', '%beauty%')->limit(6)->get();
+        $featured2 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('vouchers.title', 'LIKE', '%fashion%')->limit(4)->get();
+        $featured3 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('vouchers.title', 'LIKE', '%travel%')->limit(4)->get();
+        $featured4 = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug')->where('vouchers.title', 'LIKE', '%friday%')->limit(4)->get();
         $offers = [$top20, $featured1,$featured2,$featured3,$featured4];
         return json_encode($offers);
     }

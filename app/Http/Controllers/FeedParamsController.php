@@ -49,6 +49,9 @@ class FeedParamsController extends Controller
                     case 'category_slug_col':
                         $feedSettings->category_slug_col = $key;
                         break;
+                    case 'promo_id':
+                        $feedSettings->promo_id = $key;
+                        break;
                 }
             }
         }
@@ -100,6 +103,9 @@ class FeedParamsController extends Controller
                         break;
                     case 'category_slug_col':
                         $feedSettings->category_slug_col = $key;
+                        break;
+                    case 'promo_id':
+                        $feedSettings->promo_id = $key;
                         break;
                 }
             }

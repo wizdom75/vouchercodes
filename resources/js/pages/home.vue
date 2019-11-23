@@ -65,7 +65,7 @@
           :styles="'col-md-3 col-6 mb-3 p-0'"
         ></FeaturedCard>
       </div>
-      <h1 class="h3 text-muted">Printable Vouchers</h1>
+      <h1 class="h3 text-muted">Tech Vouchers</h1>
       <div class="row">
         <FeaturedCard
           v-for="top in featured4"
