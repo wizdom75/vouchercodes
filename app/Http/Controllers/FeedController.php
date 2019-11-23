@@ -249,7 +249,7 @@ class FeedController extends Controller
                 $voucher->valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_from_col])));
                 $voucher->valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_to_col])));
                 $voucher->category_slug = $data[$feedSettings->category_slug_col];
-                $voucher->promo_id = $data[$feedSettings->promo_id_col];
+                $voucher->promo_id = $data[$feedSettings->promo_col];
                 $voucher->save();
             }
 
