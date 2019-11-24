@@ -15,9 +15,6 @@ class FixSomeColums extends Migration
     public function up()
     {
         $this->registerEnumWithDoctrine();
-        Schema::table('feed_settings', function (Blueprint $table) {
-            $table->renameColumn('promo_col', 'promo_id_col');
-        });
         Schema::table('vouchers', function (Blueprint $table) {
             $table->text('category_slug')->change();
         });
@@ -31,9 +28,6 @@ class FixSomeColums extends Migration
     public function down()
     {
         $this->registerEnumWithDoctrine();
-        Schema::table('feed_settings', function (Blueprint $table) {
-            $table->renameColumn('promo_col', 'promo_id_col');
-        });
         Schema::table('vouchers', function (Blueprint $table) {
             $table->text('category_slug')->change();
         });
