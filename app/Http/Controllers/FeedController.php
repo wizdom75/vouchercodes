@@ -238,6 +238,7 @@ class FeedController extends Controller
                     continue;
                 }
                 $valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_from_col])));
+                $valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_to_col])));
                 $voucher = new Voucher;                        
                 $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
                 $voucher->type = $data[$feedSettings->type_col];
@@ -247,7 +248,7 @@ class FeedController extends Controller
                 $voucher->terms = $data[$feedSettings->terms_col];
                 $voucher->url = $data[$feedSettings->url_col];
                 $voucher->valid_from = ($valid_from == '1970-01-01 00:00:00')?'1970-01-01 00:00:10':$valid_from;
-                $voucher->valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_to_col])));
+                $voucher->valid_to = ($valid_to == '1970-01-01 00:00:00')?'2030-01-01 01:00:10':$valid_to;
                 $voucher->category_slug = $data[$feedSettings->category_slug_col];
                 $voucher->promo_id = $data[$feedSettings->promo_id_col];
                 $voucher->save();
