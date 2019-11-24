@@ -2,10 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container">
-        <router-link :to="{ name: 'home'}" class="logo">
-          <span class="text-primary">{{ appName }}</span>
-          .co.uk
-        </router-link>
+        <router-link :to="{ name: 'home'}" class="logo text-primary">{{ appName }}</router-link>
 
         <button
           class="navbar-toggler"
