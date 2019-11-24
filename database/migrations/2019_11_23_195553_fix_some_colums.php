@@ -16,7 +16,8 @@ class FixSomeColums extends Migration
     {
         $this->registerEnumWithDoctrine();
         Schema::table('vouchers', function (Blueprint $table) {
-            $table->text('category_slug')->change();
+            $table->dropColumn('category_slug');
+            $table->text('category_slug')->index();
         });
     }
 
@@ -29,6 +30,7 @@ class FixSomeColums extends Migration
     {
         $this->registerEnumWithDoctrine();
         Schema::table('vouchers', function (Blueprint $table) {
+            $table->dropColumn('category_slug');
             $table->text('category_slug')->change();
         });
     }
