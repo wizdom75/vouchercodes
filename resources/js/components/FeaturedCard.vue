@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
           <h5 class="text-muted text-uppercase small">{{ shop_name }}</h5>
-          <p class="card-text text-black text-justify" v-html="voucher_title"></p>
+          <p class="card-text text-black text-justify">{{ voucher_title | truncate(40) }}</p>
         </div>
       </div>
     </a>

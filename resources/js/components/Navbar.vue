@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="border">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container">
-        <router-link :to="{ name: 'home'}" class="logo text-primary">{{ appName }}</router-link>
+        <router-link :to="{ name: 'home'}" class="logo">{{ appName }}</router-link>
 
         <button
           class="navbar-toggler"
@@ -35,54 +35,54 @@
               />
               <div class="input-group-append">
                 <span class="search-form input-group-text bg-white border-left-0 rounded-0">
-                  <fa icon="search" class="text-muted" fixed-width />
+                  <fa icon="search" class="text-black" fixed-width />
                 </span>
               </div>
             </div>
           </ul>
 
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link
                 :to="{ name: 'home' }"
-                class="nav-link text-primary"
+                class="nav-link text-black"
                 active-class="active"
               >{{ $t('home') }}</router-link>
-            </li>
+            </li>-->
             <li class="nav-item">
               <router-link
                 :to="{ name: 'top-20' }"
-                class="nav-link text-primary"
+                class="nav-link text-black"
                 active-class="active"
               >{{ $t('top-20') }}</router-link>
             </li>
             <li class="nav-item">
               <router-link
                 :to="{ name: 'restaurants' }"
-                class="nav-link text-primary"
+                class="nav-link text-black"
                 active-class="active"
               >{{ $t('restaurants') }}</router-link>
             </li>
             <li class="nav-item">
               <router-link
                 :to="{ name: 'students' }"
-                class="nav-link text-primary"
+                class="nav-link text-black"
                 active-class="active"
               >{{ $t('students') }}</router-link>
             </li>
             <!-- categories dropdown -->
             <li class="nav-item dropdown text-muted megamenu">
               <a
-                class="nav-link dropdown-toggle text-primary"
+                class="nav-link dropdown-toggle text-black"
                 href="#"
                 role="button"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >Categories</a>
-              <div class="dropdown-menu text-center mt-1">
-                <div class="container-fluid">
-                  <div class="row container">
+              <div class="dropdown-menu mt-1">
+                <div class="container">
+                  <div class="row">
                     <div v-for="category in categories" class="col-md-4" :key="category.slug">
                       <router-link
                         :to="'/cat/'+category.slug "
@@ -94,9 +94,9 @@
               </div>
             </li>
             <!-- Authenticated -->
-            <li v-if="user" class="nav-item dropleft text-muted">
+            <li v-if="user" class="nav-item dropleft text-black">
               <a
-                class="nav-link dropdown text-muted"
+                class="nav-link dropdown text-black"
                 href="#"
                 role="button"
                 data-toggle="dropdown"
@@ -107,13 +107,13 @@
               </a>
               <div class="dropdown-menu mt-5">
                 <router-link :to="{ name: 'account.profile' }" class="dropdown-item pl-3">
-                  <fa icon="user" class="text-muted" fixed-width />
+                  <fa icon="user" class="text-black" fixed-width />
                   {{ $t('account') }}
                 </router-link>
 
                 <div class="dropdown-divider" />
                 <a href="#" class="dropdown-item pl-3" @click.prevent="logout">
-                  <fa icon="sign-out-alt" class="text-muted" fixed-width />
+                  <fa icon="sign-out-alt" class="text-black" fixed-width />
                   {{ $t('logout') }}
                 </a>
               </div>
@@ -129,7 +129,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <fa icon="user" style="regular" class="text-primary" fixed-width />
+                <fa icon="user" style="regular" class="text-black" fixed-width />
               </a>
               <div class="dropdown-menu mt-5">
                 <router-link

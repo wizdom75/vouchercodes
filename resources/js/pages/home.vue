@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="container">
-      <h1 class="h3 text-muted">Most Popular Today</h1>
+      <h1 class="h3 text-black">Most Popular Today</h1>
       <div class="row">
         <FeaturedCard
           v-for="top in top20"
@@ -26,7 +26,7 @@
 
     <Subscribe></Subscribe>
     <div class="container">
-      <h1 class="h3 text-muted">Health & Beauty</h1>
+      <h1 class="h3 text-black">Health & Beauty</h1>
       <div class="row">
         <FeaturedCard
           v-for="top in featured1"
@@ -39,7 +39,7 @@
           :styles="'col-md-4 col-6 mb-3 p-0'"
         ></FeaturedCard>
       </div>
-      <h1 class="h3 text-muted">Women's Fashion</h1>
+      <h1 class="h3 text-black">Fashion</h1>
       <div class="row">
         <FeaturedCard
           v-for="top in featured2"
@@ -52,7 +52,7 @@
           :styles="'col-md-3 col-6 mb-3 p-0'"
         ></FeaturedCard>
       </div>
-      <h1 class="h3 text-muted">Travel</h1>
+      <h1 class="h3 text-black">Travel</h1>
       <div class="row">
         <FeaturedCard
           v-for="top in featured3"
@@ -65,7 +65,7 @@
           :styles="'col-md-3 col-6 mb-3 p-0'"
         ></FeaturedCard>
       </div>
-      <h1 class="h3 text-muted">Tech Vouchers</h1>
+      <h1 class="h3 text-black">Tech Vouchers</h1>
       <div class="row">
         <FeaturedCard
           v-for="top in featured4"
@@ -87,7 +87,7 @@ import { mapGetters } from "vuex";
 import axios from "axios";
 export default {
   metaInfo() {
-    return { title: this.$t("home") };
+    return { title: "Voucher Codes " };
   },
   data() {
     return {
