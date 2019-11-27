@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron mt-1">
+    <div class="jumbotron mt-0">
       <h1 class="display-4 text-capitalize text-center text-white">{{page.title}}</h1>
     </div>
     <div class="container">

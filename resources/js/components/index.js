@@ -7,6 +7,7 @@ import Checkbox from './Checkbox'
 import SquareAd from './SquareAd'
 import Searched from './Searched'
 import Subscribe from './Subscribe'
+import SearchForm from './SearchForm'
 import BrowseCard from './BrowseCard'
 import PopularShops from './PopularShops'
 import FeaturedCard from './FeaturedCard'
@@ -28,6 +29,7 @@ import {
   HasError,
   Searched,
   Subscribe,
+  SearchForm,
   BrowseCard,
   AlertError,
   AlertSuccess,

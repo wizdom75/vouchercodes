@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron mt-1 mb-0 nhs rounded-0">
+    <div class="jumbotron mt-0 mb-0 nhs rounded-0">
       <h1 class="display-4 text-capitalize mt-3 text-center text-white">NHS Workers' Deals & Offers</h1>
     </div>
     <div class="container">

@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/admin/categories-csv', 'CategoryController@csvProcess');
     
     Route::post('/admin/logo-upload/{mid}', 'RetailerController@upload');
+    Route::post('/admin/banner-upload/{mid}', 'RetailerController@banner_upload');
     Route::get('/admin/vouchers', 'VoucherController@adminIndex');
     Route::get('/admin/categories/index', 'CategoryController@adminIndex');
     Route::get('/admin/retailers/index', 'RetailerController@adminIndex');

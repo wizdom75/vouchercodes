@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div class="jumbotron text-center bg-dark rounded-0 mt-1 first">
+    <div class="jumbotron text-center bg-dark rounded-0 mt-0 first">
       <div id="overlay"></div>
-      <div class="display-4 mb-4 text-white">Save money with ease.</div>
+      <div class="display-4 mb-4 text-white">All UK voucher codes in one place .</div>
 
       <div class="text-white">
-        <p class="h3">Voucher Codes for your favourite UK shops</p>
+        <p class="h6 text-white">Fully tested and working</p>
+        <!-- <SearchForm></SearchForm> -->
       </div>
     </div>
     <div class="container">
@@ -16,7 +17,7 @@
           :key="top.id"
           :voucher_title="top.title"
           :shop_link="top.slug"
-          :shop_banner="'/images/vouchers/brown-hat.jpg'"
+          :shop_banner="top.banner"
           :shop_logo="top.logo"
           :shop_name="top.store"
           :styles="'col-md-4 col-6 mb-3 p-0'"
@@ -33,7 +34,7 @@
           :key="top.id"
           :voucher_title="top.title"
           :shop_link="top.slug"
-          :shop_banner="'/images/vouchers/hollister.jpg'"
+          :shop_banner="top.banner"
           :shop_logo="top.logo"
           :shop_name="top.store"
           :styles="'col-md-4 col-6 mb-3 p-0'"
@@ -46,7 +47,7 @@
           :key="top.id"
           :voucher_title="top.title"
           :shop_link="top.slug"
-          :shop_banner="'/images/vouchers/hollister.jpg'"
+          :shop_banner="top.banner"
           :shop_logo="top.logo"
           :shop_name="top.store"
           :styles="'col-md-3 col-6 mb-3 p-0'"
@@ -59,7 +60,7 @@
           :key="top.id"
           :voucher_title="top.title"
           :shop_link="top.slug"
-          :shop_banner="'/images/vouchers/hollister.jpg'"
+          :shop_banner="top.banner"
           :shop_logo="top.logo"
           :shop_name="top.store"
           :styles="'col-md-3 col-6 mb-3 p-0'"
@@ -72,7 +73,7 @@
           :key="top.id"
           :voucher_title="top.title"
           :shop_link="top.slug"
-          :shop_banner="'/images/vouchers/hollister.jpg'"
+          :shop_banner="top.banner"
           :shop_logo="top.logo"
           :shop_name="top.store"
           :styles="'col-md-3 col-6 mb-3 p-0'"

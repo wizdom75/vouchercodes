@@ -24,7 +24,7 @@ class RedirectController extends Controller
         
 
         $click = new Click;
-
+        $click->voucher_id = $id;
         $click->ip = \Request::ip();
 
         $click->save();

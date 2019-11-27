@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron jumbotron-fluid mt-1 mb-0 restuarant">
+    <div class="jumbotron jumbotron-fluid mt-0 mb-0 restuarant">
       <h1
         class="text-white text-capitalize display-4 text-center"
       >Restaurant Vouchers & offers near you</h1>

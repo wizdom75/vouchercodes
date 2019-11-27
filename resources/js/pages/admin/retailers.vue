@@ -4,8 +4,8 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Slug</th>
+          <th scope="col">Title / Slug</th>
+          <th scope="col">Banner</th>
           <th scope="col">logo</th>
           <th scope="col">
             <button
@@ -32,8 +32,28 @@
       <tbody>
         <tr v-for="(retailer, counter) in retailers.data" :key="retailer.mid">
           <td>{{retailer.mid}}</td>
-          <td>{{retailer.title}}</td>
-          <td>{{retailer.slug}}</td>
+          <td>
+            {{retailer.title}}
+            <br />
+            {{retailer.slug}}
+          </td>
+          <td>
+            <input
+              style="display: none"
+              name="banner"
+              type="file"
+              @change="selectBanner(retailer.mid)"
+              ref="bannerInput"
+            />
+            <button @click="$refs['bannerInput'][counter++].click()">
+              <img
+                :src="retailer.banner"
+                :alt="retailer.title"
+                class="img-thumbnail border-0"
+                width="80px"
+              />
+            </button>
+          </td>
           <td>
             <input
               style="display: none"
@@ -322,6 +342,7 @@ export default {
       }),
       mid: null,
       logo: null,
+      banner: null,
       counter: 0,
       csv_file: null,
       prefix: null,
@@ -431,6 +452,29 @@ export default {
       fd.append("logo", this.logo, this.logo.name);
       axios
         .post("/api/admin/logo-upload/" + mid, fd)
+        .then(res => {
+          console.log(res);
+          this.getResults(this.pg);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    selectBanner(mid) {
+      this.banner = "";
+      const e = window.event;
+      const file = e.target.files[0];
+      this.banner = file;
+      this.mid = mid;
+
+      console.log(this.logo, this.mid);
+      this.bannerUpload(this.mid);
+    },
+    bannerUpload(mid) {
+      const fd = new FormData();
+      fd.append("banner", this.banner, this.banner.name);
+      axios
+        .post("/api/admin/banner-upload/" + mid, fd)
         .then(res => {
           console.log(res);
           this.getResults(this.pg);

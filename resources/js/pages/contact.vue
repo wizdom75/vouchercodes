@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron mt-1 rounded-0 mb-3 contact">
+    <div class="jumbotron mt-0 rounded-0 mb-3 contact">
       <h1 class="display-4 text-center text-white">{{page.title}}</h1>
     </div>
     <div class="container">

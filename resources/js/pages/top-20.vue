@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron mt-1 mb-0 top-20 rounded-0">
+    <div class="jumbotron mt-0 mb-0 top-20 rounded-0">
       <h1 class="display-4 text-capitalize text-center text-white">Top 20 Offers</h1>
     </div>
     <div class="container">

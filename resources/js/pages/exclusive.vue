@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="jumbotron mt-1 mb-0">
+    <div class="jumbotron mt-0 mb-0">
       <h1 class="display-4 text-capitalize text-center text-white">Exclusive Deals & Offers</h1>
     </div>
     <div class="container">

@@ -27,7 +27,7 @@
         <a :href="'/out/redirect/'+voucher_id"></a>
         <button
           v-if="voucher_type === 'code' || voucher_type === 'voucher'"
-          class="btn btn-warning mt-3 ml-4 text-white rounded-0"
+          class="btn btn-primary mt-3 ml-4 text-white rounded-0"
           data-toggle="modal"
           :data-target="'#revealCode_'+voucher_id"
           v-on:click="openNewBackgroundTab('/out/redirect/'+voucher_id)"
@@ -35,7 +35,7 @@
         <a :href="'/out/redirect/'+voucher_id"></a>
         <button
           v-if="voucher_type === 'sale' || voucher_type === 'sale'"
-          class="btn btn-danger mt-3 ml-4 text-white rounded-0"
+          class="btn btn-primary mt-3 ml-4 text-white rounded-0"
           v-on:click="openNewBackgroundTab('/out/redirect/'+voucher_id)"
         >Get this sale ></button>
 
@@ -45,7 +45,7 @@
         >
           <button
             v-if="voucher_type === 'deal' || voucher_type === 'promotion'"
-            class="btn btn-info mt-3 ml-4 text-white rounded-0"
+            class="btn btn-primary mt-3 ml-4 text-white rounded-0"
           >Get this deal ></button>
         </a>
       </div>

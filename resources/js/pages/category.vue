@@ -4,7 +4,7 @@
       <span>All categories</span>
     </div>
 
-    <div class="jumbotron mt-1 rounded-0 mb-0 contact">
+    <div class="jumbotron mt-0 rounded-0 mb-0 contact">
       <h1 class="display-4 text-capitalize text-center text-white">{{ctgry.title}}</h1>
     </div>
     <div class="container">

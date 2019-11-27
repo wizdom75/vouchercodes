@@ -116,6 +116,8 @@
                   <option value="deal">Deal</option>
                   <option value="code">Code</option>
                   <option value="sale">Sale</option>
+                  <option value="promotion">Promotion</option>
+                  <option value="voucher">Voucher</option>
                 </select>
                 <has-error :form="form" field="type" />
               </div>
@@ -198,7 +200,7 @@
                   v-model="form.valid_from"
                   :class="{ 'is-invalid': form.errors.has('valid_from') }"
                   class="form-control"
-                  type="date"
+                  type="datetime"
                   name="valid_from"
                 />
                 <has-error :form="form" field="valid_from" />
@@ -212,7 +214,7 @@
                   v-model="form.valid_to"
                   :class="{ 'is-invalid': form.errors.has('valid_to') }"
                   class="form-control"
-                  type="date"
+                  type="datetime"
                   name="valid_to"
                 />
                 <has-error :form="form" field="valid_to" />

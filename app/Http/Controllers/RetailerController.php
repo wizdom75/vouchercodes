@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Retailer;
+use App\RetailerBanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +37,7 @@ class RetailerController extends Controller
      */
     public function index()
     {
-        $retailers = DB::table('retailers')->orderBy('title')->paginate(10);
+        $retailers = DB::table('retailers')->leftJoin('retailer_banners', 'retailer_banners.retailer_mid', '=', 'retailers.mid')->select('retailers.*','retailer_banners.banner')->orderBy('title')->paginate(10);
         return json_encode($retailers); 
     } 
        /**
@@ -187,6 +188,35 @@ class RetailerController extends Controller
 
         }
             return $retailer->logo;
+    }
+    /**
+     * Upload images for retailer banner
+     */
+    public function banner_upload(Request $request, $mid)
+    {
+        //Handle banner upload
+        if($request->hasFile('banner')){
+            //Get banner extension
+            $ext = $request->file('banner')->getClientOriginalExtension();
+            $filename_save = 'banner_'.$mid.'.'.$ext;
+            $banner_path =  '/images/retailers/banners/';
+            $full_path = $banner_path.$filename_save;     
+            $file = $request->file('banner')->storeAs($banner_path, $filename_save);
+            $request->banner->move(public_path($banner_path), $filename_save);      
+       
+            $c = RetailerBanner::where('retailer_mid', $mid)->first();
+            if($c){
+                $c->banner = $full_path;
+                $c->update();
+                return 'Banner updated';
+            }
+            $banner = new RetailerBanner;
+            $banner->retailer_mid = $mid;
+            $banner->banner = $full_path;
+            $banner->save();
+            return 'New banner added';
+        }
+        return 'No image file uploaded!';
     }
 
     /**
