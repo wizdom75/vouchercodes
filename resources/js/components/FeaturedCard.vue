@@ -1,7 +1,7 @@
 <template>
   <div :class="styles" :key="voucher_title">
     <a :href="shop_link" class="nav-link">
-      <div class="h-100 card">
+      <div class="card d-flex align-items-stretch">
         <img v-if="shop_banner" class="card-img-top" :src="shop_banner" :alt="voucher_title" />
         <img
           v-else
