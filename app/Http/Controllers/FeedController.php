@@ -256,7 +256,7 @@ class FeedController extends Controller
                 $voucher->valid_from = $valid_from;
                 $voucher->valid_to = $valid_to;
                 $voucher->category_slug = $data[$feedSettings->category_slug_col];
-                $voucher->promo_id = $data[$feedSettings->promo_id_col];
+                $voucher->promo_id = $data[$feedSettings->promo_col];
                 $voucher->save();
             }
 
