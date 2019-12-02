@@ -50,7 +50,7 @@ class FeedParamsController extends Controller
                         $feedSettings->category_slug_col = $key;
                         break;
                     case 'promo_id_col':
-                        $feedSettings->promo_id_col = $key;
+                        $feedSettings->promo_id = $key;
                         break;
                 }
             }
