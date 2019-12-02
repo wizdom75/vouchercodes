@@ -190,7 +190,7 @@ class FeedController extends Controller
         $feed = Feed::find($id);
         $feedSettings = FeedSetting::where('feed_id', $id)->first();
 
-        //dd($feedSettings);
+        dd($feedSettings);
 
         /**
          * Affiliate prefix is set here
