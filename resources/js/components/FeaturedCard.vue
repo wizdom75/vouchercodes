@@ -6,7 +6,7 @@
         <img
           v-else
           class="card-img-top"
-          :src="'https://via.placeholder.com/740x332/2CCEBO/fff.png?text='+shop_name"
+          :src="'https://via.placeholder.com/740x332/#2CCEBO/fff.png?text='+shop_name"
           :alt="voucher_title"
         />
         <div class="nested-logo">
@@ -52,7 +52,7 @@ export default {
 }
 .nested-logo {
   position: absolute;
-  padding-top: 25%;
+  padding-top: 23%;
   padding-left: 5%;
   width: 30%;
 }
