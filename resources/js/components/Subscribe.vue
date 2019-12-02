@@ -3,7 +3,7 @@
     <div class="text-white">
       <p class="h3">Subscribe to our mailing list for daily deal offers.</p>
     </div>
-    <div class="text-light col-md-3 mx-auto">
+    <div class="text-light col-md-6 mx-auto">
       <div v-if="flashMessage === null" class="input-group mb-3">
         <input
           name="email"

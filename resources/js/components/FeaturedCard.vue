@@ -6,7 +6,7 @@
         <img
           v-else
           class="card-img-top"
-          src="https://via.placeholder.com/740x332/2CCEBO/fff.png?text=Banner"
+          :src="'https://via.placeholder.com/740x332/2CCEBO/fff.png?text='+shop_name"
           :alt="voucher_title"
         />
         <div class="nested-logo">
