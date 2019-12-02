@@ -2,7 +2,13 @@
   <div :class="styles" :key="voucher_title">
     <a :href="shop_link" class="nav-link">
       <div class="h-100 card">
-        <img class="card-img-top" :src="shop_banner" :alt="voucher_title" />
+        <img v-if="shop_banner" class="card-img-top" :src="shop_banner" :alt="voucher_title" />
+        <img
+          v-else
+          class="card-img-top"
+          src="https://via.placeholder.com/300/09f/fff.png"
+          :alt="voucher_title"
+        />
         <div class="nested-logo">
           <img class="w-100 logo-image" :src="shop_logo" :alt="shop_name" />
         </div>
