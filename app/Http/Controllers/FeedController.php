@@ -70,7 +70,8 @@ class FeedController extends Controller
     public function destroy($id)
     {
         $feed = Feed::find($id);
-
+        $feedSettings = FeedSetting::find($id);
+        $feedSettings->delete();
         $feed->delete();
 
         return 'Success';
