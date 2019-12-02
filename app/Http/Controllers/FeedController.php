@@ -188,9 +188,9 @@ class FeedController extends Controller
     public function run($id)
     {
         $feed = Feed::find($id);
-        $feedSettings = FeedSetting::where('feed_id', $id)->first();
+        $feedSettings = FeedSetting::where('feed_id', 4)->first();
 
-        dd($feedSettings);
+        //dd($feedSettings);
 
         /**
          * Affiliate prefix is set here
