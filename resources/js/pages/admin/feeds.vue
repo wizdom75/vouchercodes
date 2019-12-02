@@ -189,7 +189,7 @@
                           <option value="type_col">Type</option>
                           <option value="code_col">Code</option>
                           <option value="title_col">Title</option>
-                          <option value="category_col">Category</option>
+                          <option value="category_slug_col">Category</option>
                           <option value="blurb_col">Description</option>
                           <option value="terms_col">Terms</option>
                           <option value="promo_id_col">Promotion ID</option>
