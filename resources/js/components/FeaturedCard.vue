@@ -52,7 +52,7 @@ export default {
 }
 .nested-logo {
   position: absolute;
-  padding-top: 45%;
+  padding-top: 22%;
   padding-left: 5%;
   width: 30%;
 }
