@@ -46,7 +46,7 @@ class FeedParamsController extends Controller
                     case 'valid_to_col':
                         $feedSettings->valid_to_col = $key;
                         break;
-                    case 'category_slug_col':
+                    case 'category_col':
                         $feedSettings->category_slug_col = $key;
                         break;
                     case 'promo_id_col':
