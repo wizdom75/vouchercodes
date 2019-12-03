@@ -15,4 +15,4 @@ npm-debug.log
 yarn-error.log
 phpunit.dusk.xml
 *.code-workspace
-public/images/retailers/logos/logo_AW911.png
+public/images/retailers
