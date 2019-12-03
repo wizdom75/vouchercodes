@@ -1,7 +1,7 @@
 <template>
   <div :class="styles" :key="voucher_title">
     <a :href="shop_link" class="nav-link p-0 m-1 h-100">
-      <div class="card d-flex align-items-stretch h-100">
+      <div class="card d-flex align-items-stretch">
         <img v-if="shop_banner" class="card-img-top" :src="shop_banner" :alt="voucher_title" />
         <img
           v-else
@@ -12,9 +12,9 @@
         <div class="nested-logo">
           <img class="w-100 logo-image" :src="shop_logo" :alt="shop_name" />
         </div>
-        <div class="card-body p-3">
+        <div class="card-body">
           <h5 class="text-muted text-uppercase small">{{ shop_name }}</h5>
-          <p class="card-text text-black text-justify">{{ voucher_title | truncate(40) }}</p>
+          <p class="card-text text-black text-justify">{{ voucher_title | truncate(30) }}</p>
         </div>
       </div>
     </a>
@@ -52,13 +52,18 @@ export default {
 }
 .nested-logo {
   position: absolute;
-  padding-top: 20%;
+  padding-top: 24%;
   padding-left: 5%;
   width: 30%;
 }
 .card-img-top {
   object-fit: cover;
-  height: 60%;
+  min-height: 60%;
+  max-height: 60%;
+}
+.card-body {
+  max-height: 40%;
+  min-height: 40%;
 }
 .logo-image {
   border: 1px solid rgb(218, 222, 226);
