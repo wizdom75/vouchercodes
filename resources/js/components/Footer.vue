@@ -107,6 +107,10 @@
     <hr class="text-light" />
     <h2 class="page-header footer-brand text-white text-center">{{appName}}&reg;</h2>
     <div class="text-center small">Copyright &copy; 2019</div>
+        <div class="text-right">
+          <a class="text-white" href="https://peterncu.be">Website developed by <img class="rounded-circle"
+          src="https://peterncu.be/favicon.ico" alt=""></a>
+    </div>
   </footer>
 </template>
 <script>
