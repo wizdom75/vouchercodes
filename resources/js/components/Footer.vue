@@ -109,7 +109,7 @@
     <div class="text-center small">Copyright &copy; 2019</div>
         <div class="text-right">
           <a class="text-white" href="https://peterncu.be">Website developed by <img class="rounded-circle"
-          src="https://peterncu.be/favicon.ico" alt=""></a>
+          src="https://peterncu.be/favicon.ico" alt="start-up developer"></a>
     </div>
   </footer>
 </template>

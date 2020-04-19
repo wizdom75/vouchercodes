@@ -1,20 +1,21 @@
 <template>
   <div class="container">
-    <div class="card mt-3 flex-row flex-wrap border-0 bg-light">
+    <div v-if="loading" class="vh-100 mx-auto text-center">loading....</div>
+    <div v-else-if="!loading" class="card mt-3 flex-row flex-wrap border-0 bg-light">
       <div class="card-header border-0">
         <img :src="shop.logo" :alt="shop.title" class="border-0 m-0" width="100px" />
       </div>
       <div class="card-body border-0 rounded-0">
         <h1 class="h4 mb-0">
-          {{shop.title}}
-          <span class="text-muted">{{monthYear}} Voucher Codes</span>
+          {{ shop.title }}
+          <span class="text-muted">{{ monthYear }} Voucher Codes</span>
         </h1>
 
         <br />
         <button class="btn btn-sm btn-outline-secondary small rounded-0">Favorite</button>
 
         <a
-          :href="'/out/redirect/'+shop.mid"
+          :href="'/out/redirect/'+shop.mid+'/0'"
           target="_blank"
           rel="noopener noreferrer"
           class="btn btn-sm btn-outline-secondary small rounded-0"
@@ -38,19 +39,20 @@
           :shop_logo="shop.logo"
           :shop_title="shop.title"
           :feedback="feedback"
-        ></DealCard>
+          :paramCode="paramCode"
+        />
 
         <div class="mt-3">
-          <Searched></Searched>
+          <Searched />
         </div>
       </div>
       <div class="col-md-4">
-        <SquareAd></SquareAd>
+        <SquareAd />
         <div class="mt-3">
-          <BrowseCard></BrowseCard>
+          <BrowseCard />
         </div>
         <div class="mt-3">
-          <PopularShops title="Popular shops" :category="shop.title"></PopularShops>
+          <PopularShops title="Popular shops" :category="shop.title" />
         </div>
       </div>
     </div>
@@ -68,63 +70,11 @@ export default {
       title: window.config.appName,
       feedback: null,
       vouchers: "",
-      retailers: [
-        {
-          id: 1,
-          name: "Retailer.com"
-        },
-        {
-          id: 2,
-          name: "shop.co.uk"
-        },
-        {
-          id: 3,
-          name: "amazon.co.uk"
-        },
-        {
-          id: 4,
-          name: "Currys PC World"
-        },
-        {
-          id: 5,
-          name: "Perfume Shop"
-        },
-        {
-          id: 6,
-          name: "Gango.com"
-        },
-        {
-          id: 7,
-          name: "advancedmp3players.co.uk"
-        },
-        {
-          id: 8,
-          name: "ebay.co.uk"
-        },
-        {
-          id: 9,
-          name: "Holland & Barratt"
-        },
-        {
-          id: 10,
-          name: "HMV"
-        },
-        {
-          id: 11,
-          name: "ASOS"
-        },
-        {
-          id: 12,
-          name: "ASDA"
-        },
-        {
-          id: 13,
-          name: "Tesco"
-        }
-      ],
       shop: {},
       months: null,
-      monthYear: null
+      monthYear: null,
+      loading: true,
+      paramCode: null
     };
   },
   computed: mapGetters({
@@ -132,12 +82,16 @@ export default {
   }),
   created() {
     this.getMonthAndYear();
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    this.paramCode = urlParams.get("rc");
+    let paramCode = urlParams.get("rc");
+    console.log(paramCode);
     axios
       .get("/api/retailer/" + this.$route.params.slug)
       .then(response => {
         this.shop = response.data;
         this.getOffers(response.data.mid);
-        console.log(this.shop);
       })
       .catch(error => {
         console.log(error);
@@ -157,6 +111,9 @@ export default {
         .get("/api/offers-by-retailer/" + slug)
         .then(response => {
           this.vouchers = response.data;
+        })
+        .then(res => {
+          this.loading = false;
         })
         .catch(error => {
           console.log(error);

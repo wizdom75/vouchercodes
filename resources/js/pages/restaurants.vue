@@ -36,6 +36,7 @@
             :shop_logo="voucher.logo"
             :shop_title="voucher.store"
             :feedback="feedback"
+            :paramCode="paramCode"
           ></DealCard>
           <div class="mt-3">
             <Searched></Searched>
@@ -66,64 +67,16 @@ export default {
       title: window.config.appName,
       vouchers: "",
       feedback: null,
-      sellers: [
-        {
-          id: 1,
-          name: "Retailer.com"
-        },
-        {
-          id: 2,
-          name: "shop.co.uk"
-        },
-        {
-          id: 3,
-          name: "amazon.co.uk"
-        },
-        {
-          id: 4,
-          name: "Currys PC World"
-        },
-        {
-          id: 5,
-          name: "Perfume Shop"
-        },
-        {
-          id: 6,
-          name: "Gango.com"
-        },
-        {
-          id: 7,
-          name: "advancedmp3players.co.uk"
-        },
-        {
-          id: 8,
-          name: "ebay.co.uk"
-        },
-        {
-          id: 9,
-          name: "Holland & Barratt"
-        },
-        {
-          id: 10,
-          name: "HMV"
-        },
-        {
-          id: 11,
-          name: "ASOS"
-        },
-        {
-          id: 12,
-          name: "ASDA"
-        },
-        {
-          id: 13,
-          name: "Tesco"
-        }
-      ]
+      loading: true,
+      paramCode: null
     };
   },
   created() {
     this.getOffers();
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    this.paramCode = urlParams.get("rc");
+    let paramCode = urlParams.get("rc");
   },
   methods: {
     getOffers() {

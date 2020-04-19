@@ -26,28 +26,38 @@
         </h2>
         <!-- <span v-html="voucher_blurb" class="small text-muted"></span> -->
       </div>
-      <div class="card-right">
-        <button
-          v-if="voucher_type === 'code' || voucher_type === 'voucher'"
-          class="btn btn-primary mt-3 ml-4 text-white rounded-0 btn-lg btn-block"
-          data-toggle="modal"
-          :data-target="'#revealCode_'+voucher_id"
-          v-on:click="openNewBackgroundTab('/out/redirect/'+voucher_id)"
-        >
-          Get this code
-          <fa icon="angle-right" class="text-white" fixed-width />
-        </button>
-        <a :href="'/out/redirect/'+voucher_id"></a>
+      <div class="card-right p-3">
+        <div class="text-center" v-if="voucher_id == paramCode">
+          <input
+            class="border-0 btn mt-3 ml-4 text-black rounded-0 btn-lg btn-block pr-1"
+            type="text"
+            :value="voucher_code"
+          />
+          <span class="tiny">Enter this code at the checkout</span>
+        </div>
+        <div v-else>
+          <button
+            v-if="voucher_type === 'code' || voucher_type === 'voucher'"
+            class="btn btn-primary mt-3 ml-4 text-white rounded-0 btn-lg btn-block"
+            data-toggle="modal"
+            :data-target="'#revealCode_'+voucher_id"
+            v-on:click="openNewBackgroundTab('/out/redirect/'+voucher_mid+'/'+voucher_id, voucher_id)"
+          >
+            Get this code
+            <fa icon="angle-right" class="text-white" fixed-width />
+          </button>
+        </div>
+
         <button
           v-if="voucher_type === 'promotion' || voucher_type === 'sale'"
           class="btn btn-primary mt-3 ml-4 text-white rounded-0 btn-lg btn-block"
-          v-on:click="openNewBackgroundTab('/out/redirect/'+voucher_id)"
+          v-on:click="openNewBackgroundTab('/out/redirect/'+voucher_mid+'/'+voucher_id)"
         >
           Get this sale
           <fa icon="angle-right" class="text-white" fixed-width />
         </button>
         <a
-          :href="'/out/redirect/'+voucher_id"
+          :href="'/out/redirect/'+voucher_mid+'/'+voucher_id"
           v-on:click="'window.open('+window.location+'); return true;'"
         >
           <button
@@ -59,9 +69,12 @@
           </button>
         </a>
       </div>
+
       <!-- Modal to reveal code -->
       <div
-        class="modal fade"
+        v-if="voucher_id == paramCode"
+        class="modal fade show bg-dark"
+        style="padding-right: 16px; display: block;"
         :id="'revealCode_'+voucher_id"
         tabindex="-1"
         role="dialog"
@@ -72,7 +85,7 @@
           <div class="modal-content text-center">
             <div class="text-right">
               <button type="button" class="mr-1 close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <span v-on:click="closeModal('revealCode_'+voucher_id)" aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="text-center">
@@ -114,7 +127,8 @@ export default {
     voucher_code: { type: String, default: null },
     shop_logo: { type: String, default: null },
     shop_title: { type: String, default: null },
-    feedback: { type: String, default: null }
+    feedback: { type: String, default: null },
+    paramCode: { type: Number, default: null }
   },
   methods: {
     copyCode(myInput) {
@@ -125,10 +139,29 @@ export default {
       document.execCommand("copy");
       this.feedback = "Copied to clipboard!";
     },
-    openNewBackgroundTab(outlink) {
-      window.open(outlink);
-      window.open(window.location.href);
+    openNewBackgroundTab(outlink, rc = null) {
+      window.open(outlink, "_self");
+      let url = window.location.href;
+      if (rc) {
+        url = url.split("?")[0];
+        url += "?rc=" + rc;
+        window.open(url);
+      } else {
+        url = url.split("?")[0];
+        window.open(url);
+      }
+    },
+    closeModal(modalId) {
+      document.getElementById(modalId).removeAttribute("class");
+      document.getElementById(modalId).style.display = "none";
     }
+  },
+  mounted: () => {
+    let url = window.location.href;
+
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    let code = urlParams.get("rc");
   }
 };
 </script>
@@ -137,7 +170,7 @@ input[type="text"],
 textarea {
   outline: none;
   box-shadow: none !important;
-  border: 1px dashed rgb(236, 226, 226) !important;
+  border: 1px dashed rgb(58, 56, 56) !important;
   text-align: center;
   padding: 10px 15px;
 }
@@ -158,5 +191,9 @@ textarea {
   .card-right {
     max-width: 30%;
   }
+}
+.tiny {
+  font-size: 0.6rem;
+  text-align: justify;
 }
 </style>

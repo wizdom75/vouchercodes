@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClicksTable extends Migration
+class AddMerchantIdColumnToClicksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,7 @@ class CreateClicksTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('clicks');
         Schema::create('clicks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('merchant_id')->nullable();
@@ -30,6 +31,8 @@ class CreateClicksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clicks');
+        Schema::table('clicks', function (Blueprint $table) {
+            //
+        });
     }
 }

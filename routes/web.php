@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/out/redirect/{mid}', 'RedirectController@go');
+Route::get('/out/redirect/{mid}/{id}', 'RedirectController@go');
 
 Route::get('{path}', function () {
     return view('index');

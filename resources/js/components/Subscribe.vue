@@ -9,13 +9,13 @@
           name="email"
           id="email"
           type="text"
-          class="form-control"
+          class="form-control border-0"
           placeholder="email@example.com"
           aria-label="Email subscription"
           aria-describedby="basic"
         />
         <div class="input-group-append">
-          <button @click="subscribe" class="input-group-text" id="basic">Subscribe</button>
+          <button @click="subscribe" class="input-group-text border-0 bg-primary text-white" id="basic">Subscribe</button>
         </div>
       </div>
       <div v-else-if="flashMessage === 'success'" class="input-group mb-3">

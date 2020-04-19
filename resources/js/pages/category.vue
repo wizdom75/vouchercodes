@@ -24,6 +24,7 @@
             :shop_logo="voucher.logo"
             :shop_title="shop.title"
             :feedback="feedback"
+            :paramCode="paramCode"
           ></DealCard>
           <div class="mt-3">
             <Searched></Searched>
@@ -112,7 +113,9 @@ export default {
       months: null,
       monthYear: null,
       ctgry: null,
-      slg: this.$route.params.slug
+      slg: this.$route.params.slug,
+      loading: true,
+      paramCode: null
     };
   },
   computed: mapGetters({
@@ -121,6 +124,10 @@ export default {
   created() {
     this.getMonthAndYear();
     this.getOffers();
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    this.paramCode = urlParams.get("rc");
+    let paramCode = urlParams.get("rc");
   },
   methods: {
     getMonthAndYear() {

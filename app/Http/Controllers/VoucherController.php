@@ -155,39 +155,39 @@ class VoucherController extends Controller
 
     public function getRetailerOffers($mid)
     {    
-        $offer = Voucher::where('retailer_mid', $mid)->get();
+        $offer = DB::table('vouchers')->where('retailer_mid', $mid)->where('valid_to', '<', 'CURDATE()')->get();
         return json_encode($offer);
     }
 
     public function getCategoryOffers($slug)
     {
-        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('category_slug', 'LIKE', '%'.$slug.'%')->get();
+        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('vouchers.valid_to', '>=', 'CURDATE()')->where('category_slug', 'LIKE', '%'.$slug.'%')->get();
         $category = DB::table('categories')->select('title')->where('slug', $slug)->first();
         return json_encode([$offers, $category]);
     }
     public function getStudentOffers()
     {
-        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('description', 'LIKE', '%school%')->get();
+        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('vouchers.valid_to', '>=', 'CURDATE()')->where('description', 'LIKE', '%school%')->get();
         return json_encode($offers);
     }
     public function getNHSOffers()
     {
-        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('category_slug', 'LIKE', '%health%')->get();
+        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('vouchers.valid_to', '>=', 'CURDATE()')->where('category_slug', 'LIKE', '%health%')->get();
         return json_encode($offers);
     }
     public function getExclusiveOffers()
     {
-        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('category_slug', 'LIKE', '%christmas%')->get();
+        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('vouchers.valid_to', '>=', 'CURDATE()')->where('category_slug', 'LIKE', '%christmas%')->get();
         return json_encode($offers);
     }
     public function getFeaturedOffers($slug)
     {
-        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('category_slug', 'LIKE', '%'.$slug.'%')->get();
+        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('vouchers.valid_to', '>=', 'CURDATE()')->where('category_slug', 'LIKE', '%'.$slug.'%')->get();
         return json_encode($offers);
     }
     public function getResturantOffers()
     {
-        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('category_slug', 'LIKE', '%food%')->get();
+        $offers = DB::table('vouchers')->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')->select('vouchers.*', 'retailers.logo', 'retailers.title AS store')->where('vouchers.valid_to', '>=', 'CURDATE()')->where('category_slug', 'LIKE', '%food%')->get();
         return json_encode($offers);
     }
     public function getTop20Offers()
@@ -217,6 +217,7 @@ class VoucherController extends Controller
         ->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')
         ->leftJoin('retailer_banners', 'retailer_banners.retailer_mid', '=', 'vouchers.retailer_mid')
         ->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug', 'retailer_banners.banner')
+        ->where('vouchers.valid_to', '>=', 'CURDATE()')
         ->where('type', '=', ['voucher', 'code'])
         ->groupBy('clicks.voucher_id')
         ->limit(6)
@@ -225,6 +226,7 @@ class VoucherController extends Controller
         ->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')
         ->leftJoin('retailer_banners', 'retailer_banners.retailer_mid', '=', 'vouchers.retailer_mid')
         ->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug', 'retailer_banners.banner')
+        ->where('vouchers.valid_to', '>=', 'CURDATE()')
         ->where('vouchers.title', 'LIKE', ['%beauty%', '%perfume%'])
         ->orWhere('vouchers.category_slug', 'LIKE', ['%beauty%', '%perfume%'])
         ->limit(6)
@@ -235,6 +237,7 @@ class VoucherController extends Controller
         ->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')
         ->leftJoin('retailer_banners', 'retailer_banners.retailer_mid', '=', 'vouchers.retailer_mid')
         ->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug', 'retailer_banners.banner')
+        ->where('vouchers.valid_to', '>=', 'CURDATE()')
         ->where('vouchers.title', 'LIKE', ['%fashion%', '%cloth%'])
         ->orWhere('vouchers.category_slug', 'LIKE', ['%fashion%', '%cloth%'])
         ->limit(4)
@@ -245,6 +248,7 @@ class VoucherController extends Controller
         ->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')
         ->leftJoin('retailer_banners', 'retailer_banners.retailer_mid', '=', 'vouchers.retailer_mid')
         ->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug', 'retailer_banners.banner')
+        ->where('vouchers.valid_to', '>=', 'CURDATE()')
         ->where('vouchers.title', 'LIKE', ['%holiday%', '%travel%'])
         ->orWhere('vouchers.category_slug', 'LIKE', ['%travel%', '%airport%'])
         ->limit(4)
@@ -255,6 +259,7 @@ class VoucherController extends Controller
         ->join('retailers', 'vouchers.retailer_mid', '=', 'retailers.mid')
         ->leftJoin('retailer_banners', 'retailer_banners.retailer_mid', '=', 'vouchers.retailer_mid')
         ->select('vouchers.*', 'retailers.logo', 'retailers.title AS store', 'retailers.slug', 'retailer_banners.banner')
+        ->where('vouchers.valid_to', '>=', 'CURDATE()')
         ->where('vouchers.title', 'LIKE', ['%tech%', '%phone%'])
         ->orWhere('vouchers.category_slug', 'LIKE', ['%tech%', '%gadget%'])
         ->limit(4)

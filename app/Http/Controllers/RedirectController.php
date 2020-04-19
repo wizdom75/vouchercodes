@@ -12,23 +12,26 @@ class RedirectController extends Controller
     /**
      * Redirect method and tracking clicks
      */
-    public function go($id)
+    public function go($mid, $id)
     {
-        if(is_numeric($id)){
+        if($id > 0){
             $voucher = Voucher::find($id);
             $redirect = $voucher->url;
+            $click = new Click;
+            $click->voucher_id = $id;
+            $click->ip = \Request::ip();
+    
+            $click->save();
+            return redirect($redirect);
         }else{
-            $retailer = Retailer::find($id);
+            $retailer = Retailer::find($mid);
             $redirect = $retailer->tracking_url;
+            $click = new Click;
+            $click->ip = \Request::ip();
+            $click->merchant_id = $mid;
+
+            $click->save();
+            return redirect($redirect);
         }
-        
-
-        $click = new Click;
-        $click->voucher_id = $id;
-        $click->ip = \Request::ip();
-
-        $click->save();
-
-        return redirect($redirect);
     }
 }
