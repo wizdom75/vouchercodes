@@ -190,8 +190,6 @@ class FeedController extends Controller
         $feed = Feed::find($id);
         $feedSettings = FeedSetting::where('feed_id', $id)->first();
 
-        dd($feedSettings);
-
         /**
          * Affiliate prefix is set here
          */
@@ -273,16 +271,21 @@ class FeedController extends Controller
      */
     private function getRemoteFile($source, $destination)
     {
-        set_time_limit(0);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $source);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $data = curl_exec ($ch);
-        curl_close ($ch);
-
-        $file = fopen($destination, "w+");
-        fputs($file, $data);
-        fclose($file);
+        try {
+            set_time_limit(0);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $source);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $data = curl_exec ($ch);
+            curl_close ($ch);
+    
+            $file = fopen($destination, "w+");
+            fputs($file, $data);
+            fclose($file);
+        } catch (Exception $e) {
+            echo "Caught error ".$e->getMessage();
+        }
+        
     }
     public function makeSlug($string)
     {
