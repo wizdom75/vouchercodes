@@ -230,14 +230,14 @@ class FeedController extends Controller
          * Now process the file
          */
         while (($data = fgetcsv($handle, 0, ',')) !== FALSE){
+            
             if($i === 0){
                 //Skip headers in CSV file
             }else{ 
                 //Skip voucher if it is already in database
                 var_dump($data);
-                if(Voucher::where('promo_id', $data[$feedSettings->promo_col])->first()){
-                    continue;
-                }
+                $voucher = Voucher::where('promo_id', $data[$feedSettings->promo_col])->first() ?? new Voucher;
+                
                 $valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_from_col])));
                 
                 if($valid_from < '1970-01-01 00:00:01' || $valid_from > '2038-01-19 03:14:07'){
@@ -248,7 +248,7 @@ class FeedController extends Controller
                     $valid_to = '2030-01-01 01:00:10';
                 }
                 try {
-                    $voucher = new Voucher;                        
+                                           
                     $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
                     $voucher->type = $data[$feedSettings->type_col];
                     $voucher->code = $data[$feedSettings->code_col];
