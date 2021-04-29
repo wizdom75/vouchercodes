@@ -46,7 +46,7 @@
               <fa icon="tools" fixed />
             </button>
             <button @click="runFeed(feed)" class="btn btn-success rounded-circle ml-1">
-              <fa icon="check" fixed />
+              <fa icon="bolt" fixed />
             </button>
             <button @click="deleteItem(feed.id)" class="btn btn-danger rounded-circle ml-3">
               <fa icon="trash" fixed />
