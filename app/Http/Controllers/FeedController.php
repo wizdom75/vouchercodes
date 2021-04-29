@@ -234,6 +234,7 @@ class FeedController extends Controller
                 //Skip headers in CSV file
             }else{ 
                 //Skip voucher if it is already in database
+                var_dump($data);
                 if(Voucher::where('promo_id', $data[$feedSettings->promo_col])->first()){
                     continue;
                 }
