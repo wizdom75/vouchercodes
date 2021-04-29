@@ -245,19 +245,24 @@ class FeedController extends Controller
                 if($valid_to < '1970-01-01 00:00:01' || $valid_to > '2038-01-19 03:14:07'){
                     $valid_to = '2030-01-01 01:00:10';
                 }
-                $voucher = new Voucher;                        
-                $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
-                $voucher->type = $data[$feedSettings->type_col];
-                $voucher->code = $data[$feedSettings->code_col];
-                $voucher->title = substr($data[$feedSettings->title_col], 0,190);
-                $voucher->blurb = $data[$feedSettings->blurb_col];
-                $voucher->terms = $data[$feedSettings->terms_col];
-                $voucher->url = $data[$feedSettings->url_col];
-                $voucher->valid_from = $valid_from;
-                $voucher->valid_to = $valid_to;
-                $voucher->category_slug = substr($data[$feedSettings->category_slug_col], 0, 190);
-                $voucher->promo_id = $data[$feedSettings->promo_col];
-                $voucher->save();
+                try {
+                    $voucher = new Voucher;                        
+                    $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
+                    $voucher->type = $data[$feedSettings->type_col];
+                    $voucher->code = $data[$feedSettings->code_col];
+                    $voucher->title = substr($data[$feedSettings->title_col], 0,190);
+                    $voucher->blurb = $data[$feedSettings->blurb_col];
+                    $voucher->terms = $data[$feedSettings->terms_col];
+                    $voucher->url = $data[$feedSettings->url_col];
+                    $voucher->valid_from = $valid_from;
+                    $voucher->valid_to = $valid_to;
+                    $voucher->category_slug = substr($data[$feedSettings->category_slug_col], 0, 190);
+                    $voucher->promo_id = $data[$feedSettings->promo_col];
+                    $voucher->save();
+                } catch (Exception $e) {
+                    echo 'Caught exception '.$e->getMessage();
+                }
+                
             }
 
             $i++;//Counter used to skip csv file headers
