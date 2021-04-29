@@ -238,12 +238,12 @@ class FeedController extends Controller
                 if(Voucher::where('promo_id', $data[$feedSettings->promo_col])->first()){
                     continue;
                 }
-                $valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_from_col])));
+                $valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  mb_convert_encoding($data[$feedSettings->valid_from_col], 'UTF-8', 'UTF-8'))));
                 var_dump($valid_from);
                 if($valid_from < '1970-01-01 00:00:01' || $valid_from > '2038-01-19 03:14:07'){
                     $valid_from = '1970-01-01 00:00:10';
                 }
-                $valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_to_col])));
+                $valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  mb_convert_encoding($data[$feedSettings->valid_to_col], 'UTF-8', 'UTF-8'))));
                 if($valid_to < '1970-01-01 00:00:01' || $valid_to > '2038-01-19 03:14:07'){
                     $valid_to = '2030-01-01 01:00:10';
                 }
