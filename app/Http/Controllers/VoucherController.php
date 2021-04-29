@@ -155,7 +155,7 @@ class VoucherController extends Controller
 
     public function getRetailerOffers($mid)
     {    
-        $offer = DB::table('vouchers')->where('retailer_mid', $mid)->where('valid_to', '<', 'CURDATE()')->get();
+        $offer = DB::table('vouchers')->where('retailer_mid', $mid)->where('valid_to', '>', 'CURDATE()')->get();
         return json_encode($offer);
     }
 
