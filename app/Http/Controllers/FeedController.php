@@ -236,29 +236,29 @@ class FeedController extends Controller
                 //Skip headers in CSV file
             }else{ 
                 //Skip voucher if it is already in database
-                if(Voucher::where('promo_id', $data[$feedSettings->promo_col])->first()){
+                if(Voucher::where('promo_id', @$data[$feedSettings->promo_col])->first()){
                     continue;
                 }
-                $valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_from_col])));
+                $valid_from = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  @$data[$feedSettings->valid_from_col])));
                 if($valid_from < '1970-01-01 00:00:01' || $valid_from > '2038-01-19 03:14:07'){
                     $valid_from = '1970-01-01 00:00:10';
                 }
-                $valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  $data[$feedSettings->valid_to_col])));
+                $valid_to = date('Y-m-d H:i:s', strtotime(str_replace('-', '/',  @$data[$feedSettings->valid_to_col])));
                 if($valid_to < '1970-01-01 00:00:01' || $valid_to > '2038-01-19 03:14:07'){
                     $valid_to = '2030-01-01 01:00:10';
                 }
                 $voucher = new Voucher;                        
-                $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
-                $voucher->type = $data[$feedSettings->type_col];
-                $voucher->code = $data[$feedSettings->code_col];
-                $voucher->title = substr($data[$feedSettings->title_col], 0,190);
-                $voucher->blurb = $data[$feedSettings->blurb_col];
-                $voucher->terms = $data[$feedSettings->terms_col];
-                $voucher->url = $data[$feedSettings->url_col];
+                $voucher->retailer_mid = $affiliate.@$data[$feedSettings->retailer_mid_col];
+                $voucher->type = @$data[$feedSettings->type_col];
+                $voucher->code = @$data[$feedSettings->code_col];
+                $voucher->title = substr(@$data[$feedSettings->title_col], 0,190);
+                $voucher->blurb = @$data[$feedSettings->blurb_col];
+                $voucher->terms = @$data[$feedSettings->terms_col];
+                $voucher->url = @$data[$feedSettings->url_col];
                 $voucher->valid_from = $valid_from;
                 $voucher->valid_to = $valid_to;
-                $voucher->category_slug = substr($data[$feedSettings->category_slug_col], 0, 190);
-                $voucher->promo_id = $data[$feedSettings->promo_col];
+                $voucher->category_slug = substr(@$data[$feedSettings->category_slug_col], 0, 190);
+                $voucher->promo_id = @$data[$feedSettings->promo_col];
                 $voucher->save();
             }
 
