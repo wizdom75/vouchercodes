@@ -36,7 +36,8 @@ import {
   faPlug,
   faTools,
   faCheck,
-  faAngleRight
+  faAngleRight,
+  faBolt
 
 } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -45,7 +46,7 @@ import {
 
 library.add(
   faUser, faLock, faSignOutAlt, faCog, faSearch, fab, faHeart, faEnvelope, faUpload, faTachometerAlt, faChartBar, faFolder, faStore, faTag, faFileAlt, faEdit,
-  faTrash, faPlus, faUsers, faTags, faChartLine, faHandScissors, faCut, faPlug, faTools, faCheck, faAngleRight
+  faTrash, faPlus, faUsers, faTags, faChartLine, faHandScissors, faCut, faPlug, faTools, faCheck, faAngleRight,faBolt
 
 )
 
