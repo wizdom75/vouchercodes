@@ -263,7 +263,7 @@ class FeedController extends Controller
                     $voucher->valid_from = $valid_from;
                     $voucher->valid_to = $valid_to;
                     $voucher->category_slug = substr(mb_convert_encoding($data[$feedSettings->category_slug_col], 'UTF-8', 'UTF-8'), 0, 190);
-                    $voucher->promo_id = $data[$feedSettings->promo_col];
+                    $voucher->promo_id = mb_convert_encoding($data[$feedSettings->promo_col], 'UTF-8', 'UTF-8');
                     $voucher->save();
                 } catch (Exception $e) {
                     echo 'Caught exception '.$e->getMessage();
