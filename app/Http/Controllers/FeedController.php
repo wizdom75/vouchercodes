@@ -247,13 +247,13 @@ class FeedController extends Controller
                 if($valid_to < '1970-01-01 00:00:01' || $valid_to > '2038-01-19 03:14:07'){
                     $valid_to = '2030-01-01 01:00:10';
                 }
-                var_dump(mb_convert_encoding($data[$feedSettings->type_col], 'UTF-8', 'UTF-8'));
-                var_dump(mb_convert_encoding($data[$feedSettings->code_col], 'UTF-8', 'UTF-8'));
-                var_dump(mb_convert_encoding($data[$feedSettings->title_col], 'UTF-8', 'UTF-8'));
-                var_dump(mb_convert_encoding($data[$feedSettings->blurb_col], 'UTF-8', 'UTF-8'));
-                var_dump(mb_convert_encoding($data[$feedSettings->terms_col], 'UTF-8', 'UTF-8'));
-                var_dump(mb_convert_encoding($data[$feedSettings->url_col], 'UTF-8', 'UTF-8'));
-                var_dump(mb_convert_encoding($data[$feedSettings->category_slug_col], 'UTF-8', 'UTF-8'));
+                //var_dump(mb_convert_encoding($data[$feedSettings->type_col], 'UTF-8', 'UTF-8'));
+                //var_dump(mb_convert_encoding($data[$feedSettings->code_col], 'UTF-8', 'UTF-8'));
+                //var_dump(mb_convert_encoding($data[$feedSettings->title_col], 'UTF-8', 'UTF-8'));
+                //var_dump(mb_convert_encoding($data[$feedSettings->blurb_col], 'UTF-8', 'UTF-8'));
+                //var_dump(mb_convert_encoding($data[$feedSettings->terms_col], 'UTF-8', 'UTF-8'));
+                //var_dump(mb_convert_encoding($data[$feedSettings->url_col], 'UTF-8', 'UTF-8'));
+                //var_dump(mb_convert_encoding($data[$feedSettings->category_slug_col], 'UTF-8', 'UTF-8'));
                 var_dump(mb_convert_encoding($data[$feedSettings->promo_col], 'UTF-8', 'UTF-8'));
                 try {
                                            
