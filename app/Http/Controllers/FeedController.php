@@ -259,9 +259,9 @@ class FeedController extends Controller
                     $voucher->title = substr(mb_convert_encoding($data[$feedSettings->title_col], 'UTF-8', 'UTF-8'), 0,190);
                     $voucher->blurb = mb_convert_encoding($data[$feedSettings->blurb_col], 'UTF-8', 'UTF-8');
                     $voucher->terms = mb_convert_encoding($data[$feedSettings->terms_col], 'UTF-8', 'UTF-8');
-                    $voucher->url = $data[$feedSettings->url_col];
-                    $voucher->valid_from = $valid_from;
-                    $voucher->valid_to = $valid_to;
+                    $voucher->url = mb_convert_encoding($data[$feedSettings->url_col], 'UTF-8', 'UTF-8');
+                    $voucher->valid_from = mb_convert_encoding($valid_from, 'UTF-8', 'UTF-8');
+                    $voucher->valid_to = mb_convert_encoding($valid_to, 'UTF-8', 'UTF-8');
                     $voucher->category_slug = substr(mb_convert_encoding($data[$feedSettings->category_slug_col], 'UTF-8', 'UTF-8'), 0, 190);
                     $voucher->promo_id = mb_convert_encoding($data[$feedSettings->promo_col], 'UTF-8', 'UTF-8');
                     $voucher->save();
