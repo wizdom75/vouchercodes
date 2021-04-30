@@ -249,20 +249,20 @@ class FeedController extends Controller
                 }
                 var_dump($data[$feedSettings->type_col]);
                 var_dump($data[$feedSettings->code_col]);
-                var_dump($data[$feedSettings->title_col]);
-                var_dump($data[$feedSettings->blurb_col]);
+                var_dump(mb_convert_encoding($data[$feedSettings->title_col], 'UTF-8', 'UTF-8'));
+                var_dump(mb_convert_encoding($data[$feedSettings->blurb_col], 'UTF-8', 'UTF-8'));
                 try {
                                            
                     $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
                     $voucher->type = $data[$feedSettings->type_col];
                     $voucher->code = $data[$feedSettings->code_col];
-                    $voucher->title = substr($data[$feedSettings->title_col], 0,190);
-                    $voucher->blurb = $data[$feedSettings->blurb_col];
-                    $voucher->terms = $data[$feedSettings->terms_col];
+                    $voucher->title = substr(mb_convert_encoding($data[$feedSettings->title_col], 'UTF-8', 'UTF-8'), 0,190);
+                    $voucher->blurb = mb_convert_encoding($data[$feedSettings->blurb_col], 'UTF-8', 'UTF-8');
+                    $voucher->terms = mb_convert_encoding($data[$feedSettings->terms_col], 'UTF-8', 'UTF-8');
                     $voucher->url = $data[$feedSettings->url_col];
                     $voucher->valid_from = $valid_from;
                     $voucher->valid_to = $valid_to;
-                    $voucher->category_slug = substr($data[$feedSettings->category_slug_col], 0, 190);
+                    $voucher->category_slug = substr(mb_convert_encoding($data[$feedSettings->category_slug_col], 'UTF-8', 'UTF-8'), 0, 190);
                     $voucher->promo_id = $data[$feedSettings->promo_col];
                     $voucher->save();
                 } catch (Exception $e) {
