@@ -253,9 +253,9 @@ class FeedController extends Controller
                 var_dump(mb_convert_encoding($data[$feedSettings->blurb_col], 'UTF-8', 'UTF-8'));
                 try {
                                            
-                    $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
-                    $voucher->type = $data[$feedSettings->type_col];
-                    $voucher->code = $data[$feedSettings->code_col];
+                    $voucher->retailer_mid = mb_convert_encoding($affiliate.$data[$feedSettings->retailer_mid_col], 'UTF-8', 'UTF-8');
+                    $voucher->type = mb_convert_encoding($data[$feedSettings->type_col], 'UTF-8', 'UTF-8');
+                    $voucher->code = mb_convert_encoding($data[$feedSettings->code_col], 'UTF-8', 'UTF-8');
                     $voucher->title = substr(mb_convert_encoding($data[$feedSettings->title_col], 'UTF-8', 'UTF-8'), 0,190);
                     $voucher->blurb = mb_convert_encoding($data[$feedSettings->blurb_col], 'UTF-8', 'UTF-8');
                     $voucher->terms = mb_convert_encoding($data[$feedSettings->terms_col], 'UTF-8', 'UTF-8');
