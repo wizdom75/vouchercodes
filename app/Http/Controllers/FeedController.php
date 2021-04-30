@@ -247,7 +247,10 @@ class FeedController extends Controller
                 if($valid_to < '1970-01-01 00:00:01' || $valid_to > '2038-01-19 03:14:07'){
                     $valid_to = '2030-01-01 01:00:10';
                 }
-                var_dump($affiliate.$data[$feedSettings->retailer_mid_col]);
+                var_dump($data[$feedSettings->type_col]);
+                var_dump($data[$feedSettings->code_col]);
+                var_dump($data[$feedSettings->title_col]);
+                var_dump($data[$feedSettings->blurb_col]);
                 try {
                                            
                     $voucher->retailer_mid = $affiliate.$data[$feedSettings->retailer_mid_col];
