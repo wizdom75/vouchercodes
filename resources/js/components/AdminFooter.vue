@@ -2,7 +2,7 @@
   <footer class="text-light p-5 mt-3 mb-0 bg-info border-0">
     <hr class="text-light" />
     <h2 class="page-header footer-brand text-white text-center">{{appName}}&reg;</h2>
-    <div class="text-center small">Copyright &copy; 2019</div>
+    <div class="text-center small">Copyright &copy; 2021</div>
   </footer>
 </template>
 <script>
