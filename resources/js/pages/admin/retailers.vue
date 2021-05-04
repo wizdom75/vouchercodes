@@ -385,7 +385,7 @@ export default {
       }
       this.pg = page;
       axios
-        .get("/api/admin/retailers?page=" + page)
+        .get(`/api/admin/retailers?page=${page}`)
         .then(response => {
           this.retailers = response.data;
         })
@@ -443,15 +443,13 @@ export default {
       const file = e.target.files[0];
       this.logo = file;
       this.mid = mid;
-
-      console.log(this.logo, this.mid);
       this.fileUpload(this.mid);
     },
     fileUpload(mid) {
       const fd = new FormData();
       fd.append("logo", this.logo, this.logo.name);
       axios
-        .post("/api/admin/logo-upload/" + mid, fd)
+        .post(`/api/admin/logo-upload/${mid}`, fd)
         .then(res => {
           console.log(res);
           this.getResults(this.pg);
@@ -474,7 +472,7 @@ export default {
       const fd = new FormData();
       fd.append("banner", this.banner, this.banner.name);
       axios
-        .post("/api/admin/banner-upload/" + mid, fd)
+        .post(`/api/admin/banner-upload/${mid}`, fd)
         .then(res => {
           console.log(res);
           this.getResults(this.pg);
@@ -489,14 +487,14 @@ export default {
       const file = e.target.files[0];
       this.csv_file = file;
       this.prefix = this.$refs.affliate_prefix.value;
-      console.log(this.csv_file, this.prefix);
-      this.csvUpload(this.prefix);
+      this.csvUpload();
     },
-    csvUpload(prefix) {
+    csvUpload() {
       const fd = new FormData();
       fd.append("csv_file", this.csv_file, this.csv_file.name);
+      const postUrl = `/api/admin/retailers-csv/${this.prefix}`;
       axios
-        .post("/api/admin/retailers-csv/" + prefix, fd)
+        .post(postUrl, fd)
         .then(res => {
           console.log(res);
           this.getResults(this.pg);

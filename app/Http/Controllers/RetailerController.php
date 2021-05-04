@@ -224,7 +224,6 @@ class RetailerController extends Controller
      */
     public function csvProcess(Request $request, $prefix)
     {
-
         //Handle csv upload
         if($request->hasFile('csv_file')){
             //Get file extension
@@ -240,7 +239,7 @@ class RetailerController extends Controller
 
             }else{
                 $m = Retailer::find($prefix.''.$data[0]);
-                $r = Retailer::where('slug', $this->makeSlug($data[10]))->first();
+                $r = Retailer::where('slug', $this->makeSlug($data[9]))->first();
                 if($m || $r){
                     echo 'Duplicate record skipped';
                     continue;
@@ -254,9 +253,14 @@ class RetailerController extends Controller
                 $retailer->description = trim($data[6]);
                 $retailer->url = trim($data[10]);
                 $retailer->tracking_url = trim($data[7]);
-                $retailer->slug = $this->makeSlug($data[10]);
+                $retailer->slug = $this->makeSlug($data[9]);
                 $retailer->logo = trim($data[2]);
-                $retailer->save();
+                try {
+                    $retailer->save();
+                } catch (Exception $e) {
+                    echo 'Caught error '.$e->getMessage();
+                }
+                
                 }
             }
             $i++;

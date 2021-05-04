@@ -158,9 +158,9 @@ class CategoryController extends Controller
 
                 $category = new Category;
                 $category->id = trim($data[0]);
-                $category->parent_id = trim($data[1]);
-                $category->title = trim($data[2]);
-                $category->slug = $this->makeSlug($data[2]);
+                $category->parent_id = trim($data[3]);
+                $category->title = trim($data[1]);
+                $category->slug = $this->makeSlug($data[1]);
                 $category->save();
                 }
             }
